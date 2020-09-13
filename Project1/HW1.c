@@ -13,15 +13,6 @@ typedef struct node {
 	struct node* next;
 } node;
 
-void bubbleSort(node* start)
-{
-	int changed, i;
-	node* ptr;
-	node* lptr = NULL;
-
-
-}
-
 int main(void)
 {
 	// 필요한 포인터 및 변수 선언
@@ -59,7 +50,9 @@ int main(void)
 		return;
 	}
 
-
+	/*
+	Sort Area
+	*/
 
 
 	// 출력 하는 놈
