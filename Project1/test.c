@@ -1,102 +1,20 @@
-//// C program to implement Bubble Sort on singly linked list
-//#include<stdio.h> 
-//#include<stdlib.h> 
+//#include  <stdio.h>
 //
-///* structure for a node */
-//struct Node
+//
+//void print(int a)
 //{
-//    int data;
-//    struct Node* next;
-//};
-//
-//void insertAtTheBegin(struct Node** start_ref, int data);
-//void bubbleSort(struct Node* start);
-//void swap(struct Node* a, struct Node* b);
-//void printList(struct Node* start);
-//
-//int main()
-//{
-//    int arr[] = { 12, 56, 2, 11, 1, 90 };
-//    int list_size, i;
-//
-//    /* start with empty linked list */
-//    struct Node* start = NULL;
-//
-//
-//    // 데이터가 들어갈 공간을 할당받고 노드를 생성함
-//    for (i = 0; i < 6; i++)
-//        insertAtTheBegin(&start, arr[i]);
-//
-//    /* print list before sorting */
-//    printf("\n Linked list before sorting ");
-//    printList(start);
-//
-//    /* sort the linked list */
-//    bubbleSort(start);
-//
-//    /* print list after sorting */
-//    printf("\n Linked list after sorting ");
-//    printList(start);
-//
-//    getchar();
-//    return 0;
+//	if (a == 1)
+//		printf("true");
+//	else
+//		printf("false");
 //}
-//
-//
-///* Function to insert a node at the beginning of a linked list */
-//void insertAtTheBegin(struct Node** start_ref, int data)
+//int main(void)
 //{
-//    struct Node* ptr1 = (struct Node*)malloc(sizeof(struct Node));
-//    ptr1->data = data;
-//    ptr1->next = *start_ref;
-//    *start_ref = ptr1;
-//}
+//	int a = 5, b = 3;
 //
-///* Function to print nodes in a given linked list */
-//void printList(struct Node* start)
-//{
-//    struct Node* temp = start;
-//    printf("\n");
-//    while (temp != NULL)
-//    {
-//        printf("%d ", temp->data);
-//        temp = temp->next;
-//    }
-//}
+//	
+//	print(a>b ? 1 : 0);
 //
-///* Bubble sort the given linked list */
-//void bubbleSort(struct Node* start)
-//{
-//    int swapped, i;
-//    struct Node* ptr1;
-//    struct Node* lptr = NULL;
 //
-//    /* Checking for empty list */
-//    if (start == NULL)
-//        return;
-//
-//    do
-//    {
-//        swapped = 0;
-//        ptr1 = start;
-//
-//        while (ptr1->next != lptr)
-//        {
-//            if (ptr1->data > ptr1->next->data)
-//            {
-//                swap(ptr1, ptr1->next);
-//                swapped = 1;
-//            }
-//            ptr1 = ptr1->next;
-//        }
-//        lptr = ptr1;
-//    } while (swapped);
-//}
-//
-///* function to swap data of two nodes a and b*/
-//void swap(struct Node* a, struct Node* b)
-//{
-//    int temp = a->data;
-//    a->data = b->data;
-//    b->data = temp;
+//	return 0;
 //}
