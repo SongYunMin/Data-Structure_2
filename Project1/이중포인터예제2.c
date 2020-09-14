@@ -11,7 +11,7 @@
 //	int temp1, temp2, temp3;
 //	int i, j;
 //
-//	fp = fopen("data.txt", "r");	// data.txt파일을 읽기모드로 열어 생성된 FILE구조체를 fp에 할당
+//	fp = fopen("data_.txt", "r");	// data.txt파일을 읽기모드로 열어 생성된 FILE구조체를 fp에 할당
 //	if (fp == NULL)	// 만약 fopen함수에서 에러가 발생하여 fp에 NULL값이 저장되었다면 파일열기실패
 //	{
 //		printf("파일에 열리지 않았습니다.\n");

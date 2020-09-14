@@ -144,6 +144,7 @@
     <ClCompile Include="이중포인터예제2.c" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="..\..\..\..\Desktop\SCH_Univ\4rd_Grade_Second_Semester\자료구조 2\이중포인터 예제 2\이중포인터 예제\data_.txt" />
     <Text Include="data.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
