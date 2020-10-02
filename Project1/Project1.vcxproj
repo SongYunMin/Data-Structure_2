@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="HW1.c" />
+    <ClCompile Include="HW2.c" />
     <ClCompile Include="test.c" />
     <ClCompile Include="이중포인터예제2.c" />
   </ItemGroup>
