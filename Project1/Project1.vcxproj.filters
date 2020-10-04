@@ -13,33 +13,39 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\HW2">
+      <UniqueIdentifier>{0e4bc2e9-4b29-41b1-95d7-56ff35f9ba59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\HW1">
+      <UniqueIdentifier>{1a66ebb9-5422-4deb-b5f5-7eacefcbecfd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="HW1.c">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="이중포인터예제2.c">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="test.c">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="HW2.c">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\HW2</Filter>
     </ClCompile>
     <ClCompile Include="hw2Test.c">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\HW2</Filter>
+    </ClCompile>
+    <ClCompile Include="HW1.c">
+      <Filter>소스 파일\HW1</Filter>
+    </ClCompile>
+    <ClCompile Include="이중포인터예제2.c">
+      <Filter>소스 파일\HW1</Filter>
+    </ClCompile>
+    <ClCompile Include="test.c">
+      <Filter>소스 파일\HW1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="data_2.txt">
+      <Filter>소스 파일\HW2</Filter>
+    </Text>
     <Text Include="data.txt">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\HW1</Filter>
     </Text>
     <Text Include="..\..\..\..\Desktop\SCH_Univ\4rd_Grade_Second_Semester\자료구조 2\이중포인터 예제 2\이중포인터 예제\data_.txt">
-      <Filter>소스 파일</Filter>
-    </Text>
-    <Text Include="data_2.txt">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\HW1</Filter>
     </Text>
   </ItemGroup>
 </Project>
