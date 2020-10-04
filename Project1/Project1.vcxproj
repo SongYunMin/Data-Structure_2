@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Example8.4_Recursion.c" />
     <ClCompile Include="HW1.c" />
     <ClCompile Include="HW2.c" />
     <ClCompile Include="hw2Test.c" />

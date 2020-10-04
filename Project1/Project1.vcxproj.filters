@@ -36,6 +36,9 @@
     <ClCompile Include="test.c">
       <Filter>소스 파일\HW1</Filter>
     </ClCompile>
+    <ClCompile Include="Example8.4_Recursion.c">
+      <Filter>소스 파일\HW2</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="data_2.txt">
