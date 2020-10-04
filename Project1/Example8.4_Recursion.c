@@ -31,12 +31,15 @@ TreeNode* pop()
 void inorder_iter(TreeNode* root)
 {
 	while (1) {
+		// 왼쪽요소를 쭉 Push
 		for (; root; root = root->left) {
 			push(root);
 		}
+		// 하나씩 꺼내서 출력
 		root = pop();
 		if (!root) break;
 		printf("[%d] ", root->data);
+		// 오른쪽에 값이 있는지 확인(NULL이여도 반복)
 		root = root->right;
 	}
 }
