@@ -52,3 +52,23 @@ void enqueue(QueueType* q, element item)
 	q->data[q->rear] = item;
 }
 
+
+// delete Method
+element dequeue(QueueType* q)
+{
+	if (is_empty(q)) {
+		error("Queue is Empty");		
+	}
+	// '%' ¿øÇü Queue
+	q->front = (q->front + 1) % MAX_QUEUE_SIZE;
+
+	return q->data[q->front];
+}
+
+
+
+int main(void)
+{
+
+	return 0;
+}
