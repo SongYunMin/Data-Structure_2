@@ -19,6 +19,9 @@
     <Filter Include="소스 파일\HW1">
       <UniqueIdentifier>{1a66ebb9-5422-4deb-b5f5-7eacefcbecfd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Tree">
+      <UniqueIdentifier>{d3095e1b-f0fb-43a8-a205-60cf0826986e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HW2.c">
@@ -37,7 +40,10 @@
       <Filter>소스 파일\HW1</Filter>
     </ClCompile>
     <ClCompile Include="Example8.4_Recursion.c">
-      <Filter>소스 파일\HW2</Filter>
+      <Filter>소스 파일\Tree</Filter>
+    </ClCompile>
+    <ClCompile Include="Example8.5_Lever_Circuit_Program.c">
+      <Filter>소스 파일\Tree</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
