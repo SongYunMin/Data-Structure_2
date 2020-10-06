@@ -45,6 +45,9 @@
     <ClCompile Include="Example8.5_Lever_Circuit_Program.c">
       <Filter>소스 파일\Tree</Filter>
     </ClCompile>
+    <ClCompile Include="강민.cpp">
+      <Filter>소스 파일\HW2</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="data_2.txt">
@@ -55,6 +58,9 @@
     </Text>
     <Text Include="..\..\..\..\Desktop\SCH_Univ\4rd_Grade_Second_Semester\자료구조 2\이중포인터 예제 2\이중포인터 예제\data_.txt">
       <Filter>소스 파일\HW1</Filter>
+    </Text>
+    <Text Include="data_3.txt">
+      <Filter>소스 파일\HW2</Filter>
     </Text>
   </ItemGroup>
 </Project>
