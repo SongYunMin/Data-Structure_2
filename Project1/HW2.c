@@ -24,6 +24,7 @@ TreeNode* makeNode(int data)
 	return tmp;
 }
 
+// Node Insert(Recursive)
 TreeNode* insertRecursive(TreeNode* node, int key)
 {
 	// 트리가 공백일 시 새로운 노드 Return
@@ -35,6 +36,12 @@ TreeNode* insertRecursive(TreeNode* node, int key)
 		node->right = insertRecursive(node->right, key);
 
 	return node;
+}
+
+// Node Insert(Loop)
+TreeNode* insertLoop(TreeNode* node, int key)
+{
+
 }
 
 // Number of Total Nodes
@@ -106,7 +113,7 @@ int main(void)
 	rewind(fp);
 
 	/*
-		반복적 삽입 함수 정의
+		반복적 삽입 함수 소요시간 정의
 	*/
 
 	printf("전체 노드 갯수 : \t%d\n", getNodeCount(recursiveRoot));
