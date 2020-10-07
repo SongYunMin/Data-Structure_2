@@ -121,4 +121,4 @@ int main(void)
 	printf("단말노드의 갯수 : \t%d\n", getLeafCount(recursiveRoot));
 
 	return 0;
-}
+}`
