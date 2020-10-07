@@ -145,13 +145,14 @@ int main(void)
 	rewind(fp);										// File Pointer 초기화
 
 	start = clock();								// 시간측정 시작
+	// 파일을 읽으며 반복적 삽입 함수
 	while (!feof(fp)) {
 		fscanf(fp, "%d", &data);					// 파일을 잃어오고
 		insertLoop(&loopRoot, data);				// 반복적 삽입
 	}
 	finish = clock();								// 시간측정 끝
 	timeResult = (double)(finish - start) / CLOCKS_PER_SEC;
-	printf("반복적 삽입 소요시간 : \t%lf\n", timeResult);
+	printf("반복적 삽입 소요시간 : \t%lf\n\n", timeResult);
 
 	// 노드 갯수, 높이, 단말노드의 갯수를 출력 함
 	printf("전체 노드 갯수 : \t%d\n", getNodeCount(recursiveRoot));
@@ -159,4 +160,4 @@ int main(void)
 	printf("단말노드의 갯수 : \t%d\n", getLeafCount(recursiveRoot));
 
 	return 0;
-}`
+}
