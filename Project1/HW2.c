@@ -40,7 +40,6 @@ TreeNode* insertRecursive(TreeNode* node, int key)
 // Node Insert(Loop)
 TreeNode* insertLoop(TreeNode** node, int key)
 {
-	count++;
 	TreeNode* p, *t, *newnode;							// TreeNode 3개 선언
 
 	t = *node;											// Node를 traver Node
