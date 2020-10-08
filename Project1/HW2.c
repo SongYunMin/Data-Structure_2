@@ -40,6 +40,7 @@ TreeNode* insertRecursive(TreeNode* node, int key)
 // Node Insert(Loop)
 TreeNode* insertLoop(TreeNode** node, int key)
 {
+	count++;
 	TreeNode* p, *t, *newnode;							// TreeNode 3개 선언
 
 	t = *node;											// Node를 traver Node
@@ -48,9 +49,9 @@ TreeNode* insertLoop(TreeNode** node, int key)
 	while (t != NULL){									// Node 't'가 NULL일 때까지 반복
 		if (key == t->key)	return;						// Data가 't' Node의 Data와 같다면 Return
 		p = t;											// Node 't'를 Node 'p'에 대입
-		if (key < p)									// Data가 Node 'p' 의 Data 보다 작다면
+		if (key < p->key)								// Data가 Node 'p' 의 Data 보다 작다면
 			t = p->left;								// 왼쪽으로 이동
-		else if (key > p)								// Data가 Node 'p' 의 Data 보다 크다면
+		else 											// Data가 Node 'p' 의 Data 보다 크다면
 			t = p->right;								// 오른쪽으로 이동
 	}
 
@@ -63,7 +64,7 @@ TreeNode* insertLoop(TreeNode** node, int key)
 	if (p != NULL)										// p 가 NULL이 아니면서
 		if (key < p->key)								// Data가 Node 'p'의 Data보다 작다면
 			p->left = newnode;							// 'newnode'를 Node 'p'의 왼쪽 node로 이동
-		else if (key > p->key)							// Data가 Node 'p'의 Data보다 크다면
+		else 											// Data가 Node 'p'의 Data보다 크다면
 			p->right = newnode;							// 'newnode'를 Node 'p'의 오른쪽 node로 이동
 	else
 		*node = newnode;								// newnode를 node에 대입
@@ -112,7 +113,6 @@ int getNodeHeight(TreeNode* node)
 		height = 1 + MAX(getNodeHeight(node->left), // 재귀적으로 높이 측정
 			getNodeHeight(node->right));
 	}
-	
 	return height;									// 높이 측정 변수 Return
 }
 
@@ -155,9 +155,17 @@ int main(void)
 	printf("반복적 삽입 소요시간 : \t%lf\n\n", timeResult);
 
 	// 노드 갯수, 높이, 단말노드의 갯수를 출력 함
+	printf("------------- 순환적 삽입 결과 --------------\n");
 	printf("전체 노드 갯수 : \t%d\n", getNodeCount(recursiveRoot));
 	printf("노드의 높이 : \t\t%d\n", getNodeHeight(recursiveRoot));
 	printf("단말노드의 갯수 : \t%d\n", getLeafCount(recursiveRoot));
+	printf("\n");
+	printf("------------- 반복적 삽입 결과 --------------\n");
+	printf("전체 노드 갯수 : \t%d\n", getNodeCount(loopRoot));
+	printf("노드의 높이 : \t\t%d\n", getNodeHeight(loopRoot));
+	printf("단말노드의 갯수 : \t%d\n", getLeafCount(loopRoot));
+
+	fclose(fp);
 
 	return 0;
 }
