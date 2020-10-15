@@ -48,6 +48,9 @@
     <ClCompile Include="강민.cpp">
       <Filter>소스 파일\HW2</Filter>
     </ClCompile>
+    <ClCompile Include="Example8.6_수식트리계산.c">
+      <Filter>소스 파일\Tree</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="data_2.txt">
