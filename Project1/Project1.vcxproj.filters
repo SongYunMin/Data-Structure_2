@@ -22,6 +22,12 @@
     <Filter Include="소스 파일\Tree">
       <UniqueIdentifier>{d3095e1b-f0fb-43a8-a205-60cf0826986e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Priority_Queue">
+      <UniqueIdentifier>{448f7140-2c1a-494e-83c4-0ef13ace904d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Test">
+      <UniqueIdentifier>{7aaca679-cbca-485f-8726-7a64eae14098}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HW2.c">
@@ -48,8 +54,23 @@
     <ClCompile Include="강민.cpp">
       <Filter>소스 파일\HW2</Filter>
     </ClCompile>
-    <ClCompile Include="Example8.6_수식트리계산.c">
-      <Filter>소스 파일\Tree</Filter>
+    <ClCompile Include="Example9.3_HeapTreeTestProgram.c">
+      <Filter>소스 파일\Priority_Queue</Filter>
+    </ClCompile>
+    <ClCompile Include="소스.c">
+      <Filter>소스 파일\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="히프 정렬.c">
+      <Filter>소스 파일\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Example9.4_HeapSort.c">
+      <Filter>소스 파일\Priority_Queue</Filter>
+    </ClCompile>
+    <ClCompile Include="Example9.5_LPT Program.c">
+      <Filter>소스 파일\Priority_Queue</Filter>
+    </ClCompile>
+    <ClCompile Include="Example9.6_허프만_코드.c">
+      <Filter>소스 파일\Priority_Queue</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -141,13 +141,18 @@
   <ItemGroup>
     <ClCompile Include="Example8.4_Recursion.c" />
     <ClCompile Include="Example8.5_Lever_Circuit_Program.c" />
-    <ClCompile Include="Example8.6_수식트리계산.c" />
+    <ClCompile Include="Example9.3_HeapTreeTestProgram.c" />
+    <ClCompile Include="Example9.4_HeapSort.c" />
+    <ClCompile Include="Example9.5_LPT Program.c" />
+    <ClCompile Include="Example9.6_허프만_코드.c" />
     <ClCompile Include="HW1.c" />
     <ClCompile Include="HW2.c" />
     <ClCompile Include="hw2Test.c" />
     <ClCompile Include="test.c" />
     <ClCompile Include="강민.cpp" />
+    <ClCompile Include="소스.c" />
     <ClCompile Include="이중포인터예제2.c" />
+    <ClCompile Include="히프 정렬.c" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\..\Desktop\SCH_Univ\4rd_Grade_Second_Semester\자료구조 2\이중포인터 예제 2\이중포인터 예제\data_.txt" />
