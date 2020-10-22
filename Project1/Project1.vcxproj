@@ -142,6 +142,9 @@
     <ClCompile Include="Example8.4_Recursion.c" />
     <ClCompile Include="Example8.5_Lever_Circuit_Program.c" />
     <ClCompile Include="Example9.3_HeapTreeTestProgram.c" />
+    <ClCompile Include="Example9.4_HeapSort.c" />
+    <ClCompile Include="Example9.5_LPT Program.c" />
+    <ClCompile Include="Example9.6_허프만_코드.c" />
     <ClCompile Include="HW1.c" />
     <ClCompile Include="HW2.c" />
     <ClCompile Include="hw2Test.c" />
