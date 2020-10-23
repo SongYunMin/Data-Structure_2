@@ -21,7 +21,7 @@ int evaluate(TreeNode* root)
 	if (root == NULL)
 		return 0;
 	if (root->left == NULL && root->right == NULL)		// 양쪽 node가 NULL이면
-		return root->data;
+		return root->data;								// 데이터를 return
 	else {
 		int op1 = evaluate(root->left);
 		int op2 = evaluate(root->right);
