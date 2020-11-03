@@ -67,8 +67,9 @@
 //
 //int main(void)
 //{
-//	element e1 = { 30 }, e2 = { 10 }, e3 = { 5 };
-//	element e4, e5, e6;
+//	element e1 = { 10 }, e2 = { 40 }, e3 = { 30 }, e4 = { 5 }, e5 = { 12 }, e6 = { 6 }, e7 = {15};
+//	element e8 = { 9 }, e9 = { 60 };
+//	element r1, r2, r3, r4, r5, r6, r7, r8, r9;
 //	HeapType* heap;
 //
 //	heap = create();
@@ -78,6 +79,13 @@
 //	insert_max_heap(heap, e1);
 //	insert_max_heap(heap, e2);
 //	insert_max_heap(heap, e3);
+//	insert_max_heap(heap, e4);
+//	insert_max_heap(heap, e5);
+//	insert_max_heap(heap, e6);
+//	insert_max_heap(heap, e7);
+//	insert_max_heap(heap, e8);
+//	insert_max_heap(heap, e9);
+//
 //
 //	// Delete
 //	e4 = delete_max_heap(heap);
