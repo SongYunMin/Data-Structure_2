@@ -28,6 +28,9 @@
     <Filter Include="소스 파일\Test">
       <UniqueIdentifier>{7aaca679-cbca-485f-8726-7a64eae14098}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Graph">
+      <UniqueIdentifier>{8977bcef-ef1e-47f8-bf31-33464fd1d56f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HW2.c">
@@ -71,6 +74,9 @@
     </ClCompile>
     <ClCompile Include="Example9.6_허프만_코드.c">
       <Filter>소스 파일\Priority_Queue</Filter>
+    </ClCompile>
+    <ClCompile Include="DFS_Example.c">
+      <Filter>소스 파일\Graph</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
