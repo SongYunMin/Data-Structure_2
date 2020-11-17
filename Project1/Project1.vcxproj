@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DFS_Example.c" />
+    <ClCompile Include="Example10.1_adj_mat.c" />
     <ClCompile Include="Example8.4_Recursion.c" />
     <ClCompile Include="Example8.5_Lever_Circuit_Program.c" />
     <ClCompile Include="Example9.3_HeapTreeTestProgram.c" />
