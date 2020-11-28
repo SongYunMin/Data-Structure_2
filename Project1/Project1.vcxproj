@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DFS_Example.c" />
+    <ClCompile Include="Example12.3_Insertion_Sort.cpp" />
     <ClCompile Include="Example8.4_Recursion.c" />
     <ClCompile Include="Example8.5_Lever_Circuit_Program.c" />
     <ClCompile Include="Example9.3_HeapTreeTestProgram.c" />

@@ -31,6 +31,9 @@
     <Filter Include="소스 파일\Graph">
       <UniqueIdentifier>{8977bcef-ef1e-47f8-bf31-33464fd1d56f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Sort">
+      <UniqueIdentifier>{f6cdbfe4-ebe5-4188-91be-5a614501f698}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HW2.c">
@@ -77,6 +80,9 @@
     </ClCompile>
     <ClCompile Include="DFS_Example.c">
       <Filter>소스 파일\Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="Example12.3_Insertion_Sort.cpp">
+      <Filter>소스 파일\Sort</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
