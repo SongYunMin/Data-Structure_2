@@ -78,7 +78,7 @@
     <ClCompile Include="Example9.6_허프만_코드.c">
       <Filter>소스 파일\Priority_Queue</Filter>
     </ClCompile>
-    <ClCompile Include="DFS_Example.c">
+    <ClCompile Include="Example10.1_adj_mat.c">
       <Filter>소스 파일\Graph</Filter>
     </ClCompile>
     <ClCompile Include="Example12.3_Insertion_Sort.cpp">
