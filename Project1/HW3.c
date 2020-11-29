@@ -6,23 +6,25 @@
 clock_t start, finish;
 double bubbleTime, insertionTime, selectionTime;
 
-void reSort(char** arr, char** arrBuf,int count) {
+void reSort(char** arrBuf, char** arr, int count) {
+	printf("-------------Re Sort------------\n");
 	for (int i = 0; i < count; i++) {
 		strcpy(arrBuf[i], arr[i]);
 	}
 }
 
 void printArray(char** arr, int n) {
-	printf("--------------------------------\n");
 	for (int i = 0; i < n; i++) {
 		printf("%s\n", arr[i]);
 	}
+	//printf("--------------------------------\n");
+
 }
 
 void bubbleSort(char** arr, int n) {
 	int i, j, temp;
-	printf("----------Bubble Sort-----------\n");
-	printf("Wait....\n");
+	printf("----------Bubble Sort-----------");
+	printf("Wait....");
 	start = clock();
 	for (i = n - 1; i > 0; i--) {
 		for (j = 0; j < i; j++) {
@@ -37,14 +39,14 @@ void bubbleSort(char** arr, int n) {
 	bubbleTime = (double)(finish - start) / CLOCKS_PER_SEC;
 	printf("Bubble Sort Success....\n");
 	//printf("실행 시간 : %lf\n", bubbleTime);
-	//printArray(arr, n);
+	printArray(arr, n);
 }
 
 void insertionSort(char** arr, int n) {
 	int i, j;
 	char* key;
-	printf("---------Insertion Sort---------\n");
-	printf("Wait....\n");
+	printf("---------Insertion Sort---------");
+	printf("Wait....");
 	start = clock();
 	for (i = 1; i < n; i++) {
 		key = arr[i];
@@ -57,14 +59,14 @@ void insertionSort(char** arr, int n) {
 	insertionTime = (double)(finish - start) / CLOCKS_PER_SEC;
 	printf("Insertion Sort Success....\n");
 	//printf("실행 시간 : %lf\n", insertionTime);
-	//printArray(arr, n);
+	printArray(arr, n);
 }
 
 void selectionSort(char** arr, int n) {
 	int i, j, index, temp;
 
-	printf("---------Selection Sort---------\n");
-	printf("Wait....\n");
+	printf("---------Selection Sort---------");
+	printf("Wait....");
 	start = clock();
 	for (i = 0; i < n - 1; i++) {
 		index = i;
@@ -81,7 +83,7 @@ void selectionSort(char** arr, int n) {
 	selectionTime = (double)(finish - start) / CLOCKS_PER_SEC;
 	printf("Selection Sort Success....\n");
 	//printf("실행 시간 : %lf\n", selectionTime);
-	//printArray(arr, n);
+	printArray(arr, n);
 }
 
 void shellSort(char** arr, int n) {
@@ -130,30 +132,39 @@ int main(void)
 			printf("Memory Allocaltion Error!!\n");
 			return -1;
 		}
-		stringArr[i] = (char*)malloc(sizeof(char) * (strlen(buf)));
-		stringArrBuf[i] = (char*)malloc(sizeof(char) * (strlen(buf)));
-		stringArr[i] = ptr;
+		stringArr[i] = (char*)malloc(sizeof(char) * (strlen(buf) + 1));
+		stringArrBuf[i] = (char*)malloc(sizeof(char) * (strlen(buf) + 1));
 		stringArrBuf[i] = ptr;
+		strcpy(stringArr[i], stringArrBuf[i]);
 		i++;
 	}
 	fclose(fp);
 
 	printf("---------Default Array----------\n");
 	printArray(stringArrBuf, count);
-	bubbleSort(stringArrBuf, count); reSort(stringArr, stringArrBuf, count);
-	insertionSort(stringArrBuf, count); reSort(stringArr, stringArrBuf, count);
-	selectionSort(stringArrBuf, count); reSort(stringArr, stringArrBuf, count);
+
+	// 버블 정렬
+	bubbleSort(stringArrBuf, count);reSort(stringArrBuf, stringArr, count);
+	printArray(stringArrBuf, count);
+
+	// 삽입 정렬
+	insertionSort(stringArrBuf, count); reSort(stringArrBuf, stringArr, count);
+	printArray(stringArrBuf, count);
+
+	// 선택 정렬
+	selectionSort(stringArrBuf, count); reSort(stringArrBuf, stringArr, count);
+	printArray(stringArrBuf, count);
 
 	printf("버블 정렬 실행 시간 : %lf\n", bubbleTime);
 	printf("삽입 정렬 실행 시간 : %lf\n", insertionTime);
 	printf("선택 정렬 실행 시간 : %lf\n", selectionTime);
 
-	for (int i = 0; i < count; i++) {
-		free(stringArr[i]);
-		free(stringArrBuf[i]);
-	}
-	free(stringArr);
-	free(stringArrBuf);
+	//for (int i = 0; i < count; i++) {
+	//	free(stringArr[i]);
+	//	free(stringArrBuf[i]);
+	//}
+	//free(stringArr);
+	//free(stringArrBuf);
 
 	return 0;
 }
