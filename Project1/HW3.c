@@ -52,11 +52,24 @@ void insertionSort(char** arr, int n) {
 	printArray(arr, n);
 }
 
-void SelectionSort(char** arr, int n) {
-	int i, j, least, temp;
+void selectionSort(char** arr, int n) {
+	int i, j, index, temp;
+	start = clock();
 	for (i = 0; i < n - 1; i++) {
-		
+		index = i;
+		for (j = i + 1; j < n; j++) {
+			if (strcmp(arr[j], arr[index]) == -1) {
+				index = j;
+			}
+			temp = arr[i];
+			arr[i] = arr[index];
+			arr[index] = temp;
+		}
 	}
+	finish = clock();
+	timeResult = (double)(finish - start) / CLOCKS_PER_SEC;
+	printf("---------Selection Sort---------\n");
+	printf("실행 시간 : %lf\n", timeResult);
 	printArray(arr, n);
 }
 
@@ -111,6 +124,7 @@ int main(void)
 	printArray(stringArr, count);
 	bubbleSort(stringArr, count);
 	insertionSort(stringArr, count);
+	selectionSort(stringArr, count);
 
 	return 0;
 }
