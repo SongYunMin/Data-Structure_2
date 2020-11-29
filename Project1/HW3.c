@@ -89,10 +89,10 @@ int main(void)
 {
 	int count = 0, i, len, status = 0;
 	char** stringArr;
+	char** stringArr_;
 	char buf[100];
 	FILE* fp;
 	fp = fopen("text.txt", "rt");
-
 	// 예외 처리
 	while (fp == NULL) {
 		printf("File Not Found!\n");
@@ -102,20 +102,29 @@ int main(void)
 	// 배열 입력받음
 	while (!feof(fp)) {
 		fscanf(fp, "%s", buf);
+		 
 
 		char* ptr = (char*)malloc(sizeof(char) * strlen(buf + 1));
 		strcpy(ptr, buf);
 
 		// 처음 입력 받을땐 malloc으로 초기화
 		if (status == 0) {
-			stringArr = (char*)malloc(sizeof(char) * strlen(buf + 1) * 2);
+			stringArr = (char*)malloc(sizeof(char) * strlen(buf + 1));
 			stringArr[count++] = ptr;
 			status++;
 		}
 		// 처음 이후 부터는 realloc으로 메모리 공간 재할당
 		else {
-			stringArr = (char*)realloc(stringArr, sizeof(char) *
-				(strlen(stringArr) + strlen(buf + 1)) * 2);
+			char** temp = malloc(sizeof(char) *
+				(strlen(stringArr + 1) + strlen(buf + 1)));
+			if (temp != NULL) {
+				memcpy(temp, stringArr, sizeof(char) * strlen(buf + 1));
+				free(stringArr);
+				stringArr = temp;
+			}
+			//stringArr_ = (char*)realloc(stringArr, sizeof(char) *
+			//	(strlen(stringArr+1) + strlen(buf + 1)));
+
 			stringArr[count++] = ptr;
 		}
 	}
@@ -125,6 +134,7 @@ int main(void)
 	bubbleSort(stringArr, count);
 	insertionSort(stringArr, count);
 	selectionSort(stringArr, count);
+
 
 	return 0;
 }
