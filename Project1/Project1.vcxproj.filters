@@ -34,6 +34,9 @@
     <Filter Include="소스 파일\Sort">
       <UniqueIdentifier>{f6cdbfe4-ebe5-4188-91be-5a614501f698}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\HW3">
+      <UniqueIdentifier>{428811b4-5ace-4a7f-a35e-9427a3a33cff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HW2.c">
@@ -78,11 +81,14 @@
     <ClCompile Include="Example9.6_허프만_코드.c">
       <Filter>소스 파일\Priority_Queue</Filter>
     </ClCompile>
-    <ClCompile Include="Example10.1_adj_mat.c">
-      <Filter>소스 파일\Graph</Filter>
-    </ClCompile>
     <ClCompile Include="Example12.3_Insertion_Sort.cpp">
       <Filter>소스 파일\Sort</Filter>
+    </ClCompile>
+    <ClCompile Include="Example12.4_Bubble_Sort.cpp">
+      <Filter>소스 파일\Sort</Filter>
+    </ClCompile>
+    <ClCompile Include="HW3.c">
+      <Filter>소스 파일\HW3</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

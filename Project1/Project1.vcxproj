@@ -139,8 +139,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DFS_Example.c" />
     <ClCompile Include="Example12.3_Insertion_Sort.cpp" />
+    <ClCompile Include="Example12.4_Bubble_Sort.cpp" />
     <ClCompile Include="Example8.4_Recursion.c" />
     <ClCompile Include="Example8.5_Lever_Circuit_Program.c" />
     <ClCompile Include="Example9.3_HeapTreeTestProgram.c" />
@@ -150,6 +150,7 @@
     <ClCompile Include="HW1.c" />
     <ClCompile Include="HW2.c" />
     <ClCompile Include="hw2Test.c" />
+    <ClCompile Include="HW3.c" />
     <ClCompile Include="test.c" />
     <ClCompile Include="강민.cpp" />
     <ClCompile Include="소스.c" />
