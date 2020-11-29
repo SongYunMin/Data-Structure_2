@@ -104,5 +104,8 @@
     <Text Include="data_3.txt">
       <Filter>소스 파일\HW2</Filter>
     </Text>
+    <Text Include="text.txt">
+      <Filter>소스 파일\HW3</Filter>
+    </Text>
   </ItemGroup>
 </Project>
