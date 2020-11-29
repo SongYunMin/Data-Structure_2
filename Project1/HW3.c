@@ -159,12 +159,14 @@ int main(void)
 	printf("삽입 정렬 실행 시간 : %lf\n", insertionTime);
 	printf("선택 정렬 실행 시간 : %lf\n", selectionTime);
 
-	//for (int i = 0; i < count; i++) {
-	//	free(stringArr[i]);
-	//	free(stringArrBuf[i]);
-	//}
-	//free(stringArr);
-	//free(stringArrBuf);
+	for (int i = 0; i < count; i++) {
+		printf("%s\n", stringArr[i]);
+		printf("%s\n", stringArrBuf[i]);
+		//free(stringArr[i]);
+		//free(stringArrBuf[i]);
+	}
+	free(stringArr);
+	free(stringArrBuf);
 
 	return 0;
 }
