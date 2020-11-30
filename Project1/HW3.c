@@ -22,7 +22,6 @@ void reSort(char** arrBuf, char** arr, int count) {
 	}
 }
 
-// Error 발생
 void printArray(char** arr, int n) {
 	for (int i = 0; i < n; i++) {
 		printf("%s\n", arr[i]);
@@ -31,7 +30,9 @@ void printArray(char** arr, int n) {
 }
 
 void bubbleSort(char** arr, int n) {
-	int i, j, temp;
+	int i, j;
+	char* temp;
+	temp = malloc(sizeof(char) * 100);
 	printf("----------Bubble Sort-----------");
 	printf("Wait....");
 	start = clock();
@@ -48,11 +49,13 @@ void bubbleSort(char** arr, int n) {
 	bubbleTime = ((double)finish - start) / CLOCKS_PER_SEC;
 	printf("Bubble Sort Success....\n");
 	printArray(arr, n);
+	free(temp);
 }
 
 void insertionSort(char** arr, int n) {
 	int i, j;
-	char* key;
+	char* key = NULL;
+
 	printf("---------Insertion Sort---------");
 	printf("Wait....");
 	start = clock();
@@ -70,7 +73,9 @@ void insertionSort(char** arr, int n) {
 }
 
 void selectionSort(char** arr, int n) {
-	int i, j, index, temp;
+	int i, j, index;
+	char* temp = NULL;
+	temp = malloc(sizeof(char) * 100);
 
 	printf("---------Selection Sort---------");
 	printf("Wait....");
@@ -78,7 +83,7 @@ void selectionSort(char** arr, int n) {
 	for (i = 0; i < n - 1; i++) {
 		index = i;
 		for (j = i + 1; j < n; j++) {
-			if (strcmp(arr[j], arr[index]) == -1) {
+			if (strcmp(arr[index], arr[j]) == 1) {
 				index = j;
 			}
 			temp = arr[i];
@@ -90,6 +95,7 @@ void selectionSort(char** arr, int n) {
 	selectionTime = ((double)finish - start) / CLOCKS_PER_SEC;
 	printf("Selection Sort Success....\n");
 	printArray(arr, n);
+	free(temp);
 }
 
 
@@ -121,7 +127,7 @@ void shellSort(char** arr, int n) {
 	finish = clock();
 	shellTime = ((double)finish - start) / CLOCKS_PER_SEC;
 	printf("Shell Sort Success....\n");
-	printArray(arr, n);
+	//printArray(arr, n);
 }
 
 void mergeSort(char** arr, int n) {
@@ -134,7 +140,7 @@ void quickSort(char** arr, int n) {
 
 int main(void)
 {
-	int count = 0, i, len, status = 0;
+	int count = 0, i, status = 0;
 	char** stringArr = NULL, ** stringArrBuf = NULL;
 	char* ptr = NULL;
 	char buf[100];
@@ -156,8 +162,9 @@ int main(void)
 	}
 	rewind(fp);
 
-	stringArr = (char**)malloc(sizeof(char*) * count);
-	stringArrBuf = (char**)malloc(sizeof(char*) * count);
+	stringArr = malloc(sizeof(char*) * count);
+	stringArrBuf = malloc(sizeof(char*) * count);
+
 	if (stringArr == NULL || stringArrBuf == NULL) {
 		printf("Memory Allocation Error!\n");
 		free(stringArr);
@@ -168,16 +175,15 @@ int main(void)
 	// 배열 입력받음
 	for (i = 0; i < count || !feof(fp); i++) {
 		int error = fscanf(fp, "%s", &buf);
-		//int test = stringLength(buf);
-		//printf("test : %d", test);
 		if (error == EOF) {
 			printf("Error reading file!\n");
 			return error;
 		}
 
-		ptr = (char*)malloc(sizeof(char) * stringLength(buf));
-		stringArr[i] = (char*)malloc(sizeof(char) * stringLength(buf));
-		stringArrBuf[i] = (char*)malloc(sizeof(char) * stringLength(buf));
+		ptr = malloc(sizeof(char) * stringLength(buf));
+		stringArr[i] = malloc(sizeof(char) * stringLength(buf));
+		stringArrBuf[i] = malloc(sizeof(char) * stringLength(buf));
+
 		if (ptr == NULL || stringArr[i] == NULL || stringArrBuf[i] == NULL) {
 			printf("Memory Allocation Error!\n");
 			free(stringArr[i]);
@@ -186,39 +192,41 @@ int main(void)
 			return -1;
 		}
 		strcpy_s(ptr, stringLength(buf), buf);
-		// Buf[1]에서 메모리 액세스 에러 발생
 		stringArrBuf[i] = ptr;
 		strcpy_s(stringArr[i], stringLength(buf), stringArrBuf[i]);
 	}
 	fclose(fp);
 
 	printf("---------Default Array----------\n");
-	printArray(stringArrBuf, count);
+	//printArray(stringArrBuf, count);
 
 	// 버블 정렬
 	bubbleSort(stringArrBuf, count); reSort(stringArrBuf, stringArr, count);
 	//printArray(stringArrBuf, count);
 
 	// 삽입 정렬
-	insertionSort(stringArrBuf, count); reSort(stringArrBuf, stringArr, count);
+	insertionSort(stringArrBuf, count);
+	reSort(stringArrBuf, stringArr, count);	// reSort 까지 문제 없음
 	//printArray(stringArrBuf, count);
 
 	// 선택 정렬
-	selectionSort(stringArrBuf, count);
-	reSort(stringArrBuf, stringArr, count);
+	// TODO : 정렬 값 이상하게 출력 됨 - 중복값에 대한 Issue 있는듯
+	selectionSort(stringArrBuf, count); reSort(stringArrBuf, stringArr, count);
 	//printArray(stringArrBuf, count);
 
 	printf("버블 정렬 실행 시간 : %lf\n", bubbleTime);
 	printf("삽입 정렬 실행 시간 : %lf\n", insertionTime);
 	printf("선택 정렬 실행 시간 : %lf\n", selectionTime);
+	printf("쉘 정렬 실행 시간 : %lf\n", shellTime);
+
 
 	//// TODO : 할당 해제 에러
-	//for (i = 0; i < count; i++) {
-	//	free(stringArr[i]);
-	//	free(stringArrBuf[i]);
-	//}
-	//free(stringArr);
-	//free(stringArrBuf);
+	for (i = 0; i < count; i++) {
+		free(stringArr[i]);
+		free(stringArrBuf[i]);
+	}
+	free(stringArr);
+	free(stringArrBuf);
 
 	return 0;
 }
