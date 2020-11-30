@@ -95,7 +95,7 @@ void selectionSort(char** arr, int n) {
 
 void shellInsertionSort(char** arr, int first, int last, int gap) {
 	int i, j;
-	char * key;
+	char* key;
 
 	for (i = first + gap; i <= last; i = i + gap) {
 		key = arr[i];
@@ -185,10 +185,10 @@ int main(void)
 			free(ptr);
 			return -1;
 		}
-		strcpy_s(ptr,stringLength(buf) ,buf);
+		strcpy_s(ptr, stringLength(buf), buf);
+		// Buf[1]에서 메모리 액세스 에러 발생
 		stringArrBuf[i] = ptr;
-		strcpy_s(stringArr[i],stringLength(buf), stringArrBuf[i]);
-		i++;
+		strcpy_s(stringArr[i], stringLength(buf), stringArrBuf[i]);
 	}
 	fclose(fp);
 
@@ -204,7 +204,7 @@ int main(void)
 	//printArray(stringArrBuf, count);
 
 	// 선택 정렬
-	selectionSort(stringArrBuf, count); 
+	selectionSort(stringArrBuf, count);
 	reSort(stringArrBuf, stringArr, count);
 	//printArray(stringArrBuf, count);
 
