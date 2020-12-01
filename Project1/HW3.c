@@ -29,6 +29,7 @@ void printArray(char** arr, int n) {
 
 }
 
+//
 void bubbleSort(char** arr, int n) {
 	int i, j;
 	char* temp;
@@ -48,10 +49,11 @@ void bubbleSort(char** arr, int n) {
 	finish = clock();
 	bubbleTime = ((double)finish - start) / CLOCKS_PER_SEC;
 	printf("Bubble Sort Success....\n");
-	printArray(arr, n);
+	//printArray(arr, n);
 	free(temp);
 }
 
+// 삽입 정렬
 void insertionSort(char** arr, int n) {
 	int i, j;
 	char* key = NULL;
@@ -69,9 +71,10 @@ void insertionSort(char** arr, int n) {
 	finish = clock();
 	insertionTime = ((double)finish - start) / CLOCKS_PER_SEC;
 	printf("Insertion Sort Success....\n");
-	printArray(arr, n);
+	//printArray(arr, n);
 }
 
+// 선택 정렬
 void selectionSort(char** arr, int n) {
 	int i, j, index;
 	char* temp = NULL;
@@ -94,11 +97,11 @@ void selectionSort(char** arr, int n) {
 	finish = clock();
 	selectionTime = ((double)finish - start) / CLOCKS_PER_SEC;
 	printf("Selection Sort Success....\n");
-	printArray(arr, n);
+	//printArray(arr, n);
 	free(temp);
 }
 
-
+// 쉘 정렬
 void shellInsertionSort(char** arr, int first, int last, int gap) {
 	int i, j;
 	char* key;
@@ -219,14 +222,13 @@ int main(void)
 	printf("선택 정렬 실행 시간 : %lf\n", selectionTime);
 	printf("쉘 정렬 실행 시간 : %lf\n", shellTime);
 
-
-	//// TODO : 할당 해제 에러
-	for (i = 0; i < count; i++) {
-		free(stringArr[i]);
-		free(stringArrBuf[i]);
-	}
-	free(stringArr);
-	free(stringArrBuf);
+	////// TODO : 할당 해제 에러
+	//for (i = 0; i < count; i++) {
+	//	free(stringArr[i]);
+	//	free(stringArrBuf[i]);
+	//}
+	//free(stringArr);
+	//free(stringArrBuf);
 
 	return 0;
 }
