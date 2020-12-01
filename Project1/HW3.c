@@ -137,9 +137,8 @@
 //
 //	// 분할 정렬된 list를 Merge함
 //	while (i <= mid && j <= right) {
-//		if (strcmp(arr[i], arr[j]) == 1 || strcmp(arr[i], arr[j]) == 0){
+//		if (strcmp(arr[i], arr[j]) <= 0 ){
 //			strcpy(buf[k++], arr[i++]);
-//			//buf[k++] = arr[i++];
 //		}
 //		else {
 //			strcpy(buf[k++], arr[j++]);
@@ -167,9 +166,9 @@
 //	int mid, i;
 //	char** buf = NULL;
 //	// 동적 할당
-//	buf = malloc(sizeof(char*) * right);
+//	buf = (char **)malloc(sizeof(char*) * right);
 //	for (i = 0; i < right; i++) {
-//		buf[i] = malloc(sizeof(char*) * stringLength(arr[i]));
+//		buf[i] = (char *)malloc(sizeof(char) * 200);
 //	}
 //	
 //	if (left < right) {
@@ -264,9 +263,9 @@
 //	shellSort(stringArrBuf, count); printArray(stringArrBuf, count);
 //	reSort(stringArrBuf, stringArr, count);
 //
-//	//// 합병 정렬
-//	//mergeSort(stringArrBuf, 0, count); printArray(stringArrBuf, count);
-//	//reSort(stringArrBuf, stringArr, count);
+//	// 합병 정렬
+//	mergeSort(stringArrBuf, 0, count-1); printArray(stringArrBuf, count);
+//	reSort(stringArrBuf, stringArr, count);
 //
 //	printf("버블 정렬 실행 시간 : %lf\n", bubbleTime);
 //	printf("삽입 정렬 실행 시간 : %lf\n", insertionTime);
