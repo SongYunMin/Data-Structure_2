@@ -22,7 +22,7 @@ void reSort(char** arrBuf, char** arr, int count)
 	printf("-------------Re Sort------------\n");
 	for (int i = 0; i < count; i++) {
 		// ISSUE : Access 위반
-		strcpy_s(arrBuf[i], stringLength(arr[i]), arr[i]);
+		strcpy(arrBuf[i], arr[i]);
 	}
 }
 
@@ -85,7 +85,7 @@ void selectionSort(char** arr, int n)
 	for (i = 0; i < n - 1; i++) {
 		index = i;
 		for (j = i + 1; j < n; j++) {
-			if (strcmp(arr[index], arr[j]) == 1) {
+			if (strcmp(arr[index], arr[j]) < 0) {
 				index = j;
 			}
 			temp = arr[i];
@@ -277,6 +277,7 @@ element deleteHeap(HeapType* h)
 	return item;
 }
 
+// 히프 정렬
 void heapSort(element * arr, int n)
 {
 	int i;
@@ -297,21 +298,23 @@ void heapSort(element * arr, int n)
 
 int main(void)
 {
-	int i, status = 0;
+	// 필요한 변수 및 instance 생성
+	int i;
 	char** stringArr = NULL, ** stringArrBuf = NULL;
 	char* ptr = NULL;
 	char buf[100];
 	FILE* fp;
 	element* heapList;
 
-
+	// Open File
 	fp = fopen("text.txt", "r");
-	// 예외 처리
+	// NULL Check
 	while (fp == NULL) {
 		printf("File Not Found!\n");
 		return -1;
 	}
 
+	// Read File (counting)
 	while (!feof(fp)) {
 		int error = fscanf(fp, "%s", buf);
 		if (error == EOF) {
@@ -320,13 +323,13 @@ int main(void)
 		}
 		count++;
 	}
-	rewind(fp);
+	rewind(fp);			// Initialize File Pointer
 
+	// 세로 길이 메모리 할당
 	stringArr = malloc(sizeof(char*) * count);
 	stringArrBuf = malloc(sizeof(char*) * count);
-	heapList = malloc(sizeof(element) * count);
-	temp = malloc(sizeof(char*) * count);
 
+	// NULL Check
 	if (stringArr == NULL || stringArrBuf == NULL) {
 		printf("Memory Allocation Error!\n");
 		free(stringArr);
@@ -334,21 +337,21 @@ int main(void)
 		return -1;
 	}
 
-	// 배열 입력받음
+	// counting된 변수보다 i가 작거나 파일의 끝일 경우 (결국 같음)
 	for (i = 0; i < count || !feof(fp); i++) {
+		// Error Check
 		int error = fscanf(fp, "%s", &buf);
 		if (error == EOF) {
 			printf("Error reading file!\n");
 			return error;
 		}
 
+		// 가로 길이 메모리 할당 (문자열 Size만큼 할당 함)
 		ptr = malloc(sizeof(char) * stringLength(buf));
 		stringArr[i] = malloc(sizeof(char) * stringLength(buf));
 		stringArrBuf[i] = malloc(sizeof(char) * stringLength(buf));
-		temp[i] = malloc(sizeof(char) * stringLength(buf));
-		heapList = malloc(sizeof(element) * stringLength(buf));
-		heapList[i].key = buf;
 
+		// NULL Check
 		if (ptr == NULL || stringArr[i] == NULL || stringArrBuf[i] == NULL) {
 			printf("Memory Allocation Error!\n");
 			free(stringArr[i]);
@@ -356,8 +359,13 @@ int main(void)
 			free(ptr);
 			return -1;
 		}
+
+		// 파일에 저장된 문자열 각 배열에 복사
 		strcpy(ptr, buf);
-		stringArrBuf[i] = ptr;
+		//strcpy(heapList[i].key, ptr);
+		//heapList[i].key = ptr;
+		strcpy(stringArrBuf[i], ptr);
+		//stringArrBuf[i] = ptr;
 		strcpy(stringArr[i], stringArrBuf[i]);
 	}
 	fclose(fp);
@@ -384,6 +392,10 @@ int main(void)
 	// 합병 정렬
 	printf("-----------Merge Sort-----------");
 	printf("Wait....");
+	temp = malloc(sizeof(char*) * count);			// Merge Sort를 위해 생성한 (char**) 배열
+	for (i = 0; i < count; i++) {
+		temp[i] = malloc(sizeof(char) * 100);
+	}
 	start = clock();
 	mergeSort(stringArrBuf, 0, count-1); 
 	finish = clock();
@@ -391,6 +403,11 @@ int main(void)
 	printf("Merge Sort Success....\n");
 	printArray(stringArrBuf, count);
 	reSort(stringArrBuf, stringArr, count);
+	// 할당 해제
+	for (i = 0; i < count; i++) {
+		free(temp[i]);
+	}
+	free(temp);
 
 	// 퀵 정렬
 	printf("-----------Quick Sort-----------");
@@ -406,11 +423,14 @@ int main(void)
 	// 히프 정렬
 	printf("------------Heap Sort-----------");
 	printf("Wait....");
+	heapList = malloc(sizeof(element) * count);		// Heap Sort를 위해 생성한 Heap
 	start = clock();
 	heapSort(heapList, count);
 	finish = clock();
 	heapTime = ((double)finish - start) / CLOCKS_PER_SEC;
+	printf("Heap Sort Success....\n");
 	printArray(stringArrBuf, count);
+	free(heapList);
 
 	printf("버블 정렬 실행 시간 : %lf\n", bubbleTime);
 	printf("삽입 정렬 실행 시간 : %lf\n", insertionTime);
@@ -421,11 +441,11 @@ int main(void)
 
 	////// TODO : 할당 해제 에러
 	//for (i = 0; i < count; i++) {
+	//	//free(stringArrBuf[i]);
 	//	free(stringArr[i]);
-	//	free(stringArrBuf[i]);
 	//}
+	////free(stringArrBuf);
 	//free(stringArr);
-	//free(stringArrBuf);
 
 	return 0;
 }
