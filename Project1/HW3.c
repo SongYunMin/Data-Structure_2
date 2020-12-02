@@ -2,11 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#define MAX_ELEMENT 280000
 
 clock_t start, finish;
-double bubbleTime, insertionTime, selectionTime, shellTime, mergeTime;
+double bubbleTime, insertionTime, selectionTime, shellTime, mergeTime, quickTime, heapTime;
 int count;
-char** mergeBuf;
+char** temp;
+//char** pivotBuf;
 int stringLength(char* str) 
 {
 	int i = 0;
@@ -140,26 +142,26 @@ void merge(char** arr, int left, int mid, int right)
 	// 분할 정렬된 list를 Merge함
 	while (i <= mid && j <= right) {
 		if (strcmp(arr[i], arr[j]) <= 0 ){
-			strcpy(mergeBuf[k++], arr[i++]);
+			strcpy(temp[k++], arr[i++]);
 		}
 		else {
-			strcpy(mergeBuf[k++], arr[j++]);
+			strcpy(temp[k++], arr[j++]);
 		}
 	}
 	if (i > mid) {			// 남아있는 레코드 일괄 복사
 		for (l = j; l <= right; l++) {
-			strcpy(mergeBuf[k++], arr[l]);
+			strcpy(temp[k++], arr[l]);
 		}
 	}
 	else {					// 남아있는 레코드 일괄 복사
 		for (l = i; l <= mid; l++) {
-			strcpy(mergeBuf[k++], arr[l]);
+			strcpy(temp[k++], arr[l]);
 		}
 	}
 
 	// 원래의 배열로 재 복사
 	for (l = left; l <= right; l++) {
-		strcpy(arr[l], mergeBuf[l]);
+		strcpy(arr[l], temp[l]);
 	}
 
 }
@@ -167,11 +169,6 @@ void merge(char** arr, int left, int mid, int right)
 void mergeSort(char** arr, int left, int right) 
 {
 	int mid, i;
-	// 동적 할당
-	mergeBuf = (char**)malloc(sizeof(char*) * count);
-	for (i = 0; i < count; i++) {
-		mergeBuf[i] = (char*)malloc(sizeof(char) * 100);
-	}
 
 	if (left < right) {
 		mid = (left + right) / 2;		// 리스트 균등 분할
@@ -182,16 +179,118 @@ void mergeSort(char** arr, int left, int right)
 
 }
 
+// 퀵 정렬 martition Method
 int partition(char** arr, int left, int right)
 {
-	char* pivot, temp;
+	int low, high;
+	char* pivot, *temp;
+	low = left;
+	high = right + 1;
+	pivot = arr[left];
+
+	do {
+		do
+			low++;
+		while (strcmp(arr[low], pivot) < 0);
+		do
+			high--;
+		while (strcmp(arr[high], pivot) > 0);
+		if (low < high) {
+			temp = arr[left];
+			arr[left] = arr[high];
+			arr[high] = temp;
+		}
+	} while (low < high);
+
+	temp = arr[left];
+	arr[left] = arr[high];
+	arr[high] = temp;
+
+	return high;
 }
 
 void quickSort(char** arr, int left, int right) 
 {
 	if (left < right) {
 		int quick = partition(arr, left, right);
+		quickSort(arr, left, quick - 1);
+		quickSort(arr, quick + 1, right);
 	}
+}
+
+
+typedef struct {
+	char** key;
+} element;
+
+typedef struct {
+	element heap[MAX_ELEMENT];
+	int heapSize;
+} HeapType;
+
+HeapType* create()
+{
+	return (HeapType*)malloc(sizeof(HeapType));
+}
+
+void init(HeapType* h)
+{
+	h->heapSize = 0;
+}
+
+void insertHeap(HeapType* h, element item)
+{
+	int i;
+	i = ++(h->heapSize);
+	
+	// 트리를 거슬러 올라가면서 부모 노드와 비교하는 과정
+	while ((i != 1) && strcmp(&item.key, &h->heap[i / 2].key) > 0)
+	{
+		h->heap[i] = h->heap[i / 2];
+		i /= 2;
+	}
+	strcpy(&h->heap[i].key, &item.key);
+}
+
+element deleteHeap(HeapType* h)
+{
+	int parent, child;
+	element item, temp;
+
+	item = h->heap[1];
+	temp = h->heap[(h->heapSize)--];
+	parent = 1;
+	child = 2;
+
+	while (child <= h->heapSize)
+	{
+		if ((child < h->heapSize) && strcmp(&h->heap[child].key, &h->heap[child + 1].key) < 0) {
+			child++;
+		}
+		if (strcmp(&temp.key, &h->heap[child].key) >= 0) break;
+		h->heap[parent] = h->heap[child];
+		parent = child;
+		child *= 2;
+	}
+
+	strcpy(&h->heap[parent].key, &temp.key);
+	return item;
+}
+
+void heapSort(element * arr, int n)
+{
+	int i;
+	HeapType* h;
+	
+	h = create();
+	init(h);
+	for (i = 0; i < n; i++) {
+		insertHeap(h, arr[i]);
+	}
+	for (i = (n - 1); i >= 0; i--) {
+		arr[i] = deleteHeap(h);
+	}
+	free(h);
 }
 
 
@@ -203,6 +302,8 @@ int main(void)
 	char* ptr = NULL;
 	char buf[100];
 	FILE* fp;
+	element* heapList;
+
 
 	fp = fopen("text.txt", "r");
 	// 예외 처리
@@ -223,7 +324,8 @@ int main(void)
 
 	stringArr = malloc(sizeof(char*) * count);
 	stringArrBuf = malloc(sizeof(char*) * count);
-	mergeBuf = malloc(sizeof(char*) * count);
+	heapList = malloc(sizeof(element) * count);
+	temp = malloc(sizeof(char*) * count);
 
 	if (stringArr == NULL || stringArrBuf == NULL) {
 		printf("Memory Allocation Error!\n");
@@ -243,7 +345,9 @@ int main(void)
 		ptr = malloc(sizeof(char) * stringLength(buf));
 		stringArr[i] = malloc(sizeof(char) * stringLength(buf));
 		stringArrBuf[i] = malloc(sizeof(char) * stringLength(buf));
-		mergeBuf[i] = malloc(sizeof(char) * stringLength(buf));
+		temp[i] = malloc(sizeof(char) * stringLength(buf));
+		heapList = malloc(sizeof(element) * stringLength(buf));
+		heapList[i].key = buf;
 
 		if (ptr == NULL || stringArr[i] == NULL || stringArrBuf[i] == NULL) {
 			printf("Memory Allocation Error!\n");
@@ -288,19 +392,32 @@ int main(void)
 	printArray(stringArrBuf, count);
 	reSort(stringArrBuf, stringArr, count);
 
+	// 퀵 정렬
+	printf("-----------Quick Sort-----------");
+	printf("Wait....");
+	start = clock();
+	quickSort(stringArrBuf, 0, count - 1); 
+	finish = clock();
+	quickTime = ((double)finish - start) / CLOCKS_PER_SEC;
+	printf("Quick Sort Success....\n");
+	printArray(stringArrBuf, count);
+	reSort(stringArrBuf, stringArr, count);
 
-	//// 퀵 정렬
-	//quickSort(stringArrBuf, 0, count - 1);
-	//reSort(stringArrBuf, stringArr, count);
-	//printArray(stringArrBuf, count);
-
-
+	// 히프 정렬
+	printf("------------Heap Sort-----------");
+	printf("Wait....");
+	start = clock();
+	heapSort(heapList, count);
+	finish = clock();
+	heapTime = ((double)finish - start) / CLOCKS_PER_SEC;
+	printArray(stringArrBuf, count);
 
 	printf("버블 정렬 실행 시간 : %lf\n", bubbleTime);
 	printf("삽입 정렬 실행 시간 : %lf\n", insertionTime);
 	printf("선택 정렬 실행 시간 : %lf\n", selectionTime);
 	printf("쉘 정렬 실행 시간 : %lf\n", shellTime);
 	printf("합병 정렬 실행 시간 : %lf\n", mergeTime);
+	printf("히프 정렬 실행 시간 : %lf\n", heapTime);
 
 	////// TODO : 할당 해제 에러
 	//for (i = 0; i < count; i++) {
