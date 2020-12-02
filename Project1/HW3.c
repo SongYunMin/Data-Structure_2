@@ -194,6 +194,8 @@ void quickSort(char** arr, int left, int right)
 	}
 }
 
+
+
 int main(void)
 {
 	int i, status = 0;
@@ -287,10 +289,10 @@ int main(void)
 	reSort(stringArrBuf, stringArr, count);
 
 
-	// Äü Á¤·Ä
-	quickSort(stringArrBuf, 0, count - 1);
-	reSort(stringArrBuf, stringArr, count);
-	printArray(stringArrBuf, count);
+	//// Äü Á¤·Ä
+	//quickSort(stringArrBuf, 0, count - 1);
+	//reSort(stringArrBuf, stringArr, count);
+	//printArray(stringArrBuf, count);
 
 
 
