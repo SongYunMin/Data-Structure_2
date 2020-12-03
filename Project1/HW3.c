@@ -26,15 +26,6 @@ void init(HeapType* h)
 	h->heap = (char**)malloc(sizeof(char*) * count);
 }
 
-// 문자열 길이 측정 (strlen은 NULL을 포함하지 않음)
-int stringLength(char* str) 
-{
-	int i = 0;
-	for (i = 0; str[i] != '\0'; i++);
-
-	return i + 1;
-}
-
 // 재정렬 메소드
 void reSort(char** arrBuf, char** arr, int count) 
 {
@@ -298,7 +289,6 @@ void heapSort(char ** arr, int n)
 	free(h);
 }
 
-
 // 메인
 int main(void)
 {
@@ -306,7 +296,7 @@ int main(void)
 	int i;
 	char** stringArr = NULL, ** stringArrBuf = NULL;
 	char* ptr = NULL;
-	char buf[300];
+	char buf[100];
 	FILE* fp;
 
 	// Open File
@@ -350,9 +340,9 @@ int main(void)
 		}
 
 		// 가로 길이 메모리 할당 (문자열 Size만큼 할당 함)
-		ptr = malloc(sizeof(char) * stringLength(buf));
-		stringArr[i] = malloc(sizeof(char) * stringLength(buf));
-		stringArrBuf[i] = malloc(sizeof(char) * stringLength(buf));
+		ptr = malloc(sizeof(char) * 100);
+		stringArr[i] = malloc(sizeof(char) * 100);
+		stringArrBuf[i] = malloc(sizeof(char) * 100);
 
 		// NULL Check
 		if (ptr == NULL || stringArr[i] == NULL || stringArrBuf[i] == NULL) {
@@ -442,13 +432,11 @@ int main(void)
 	printf("퀵 정렬 실행 시간 : %lf\n", quickTime);
 	printf("히프 정렬 실행 시간 : %lf\n", heapTime);
 
-	////// TODO : 할당 해제 에러
-	//for (i = 0; i < count; i++) {
-	//	//free(stringArrBuf[i]);
-	//	free(stringArr[i]);
-	//}
-	////free(stringArrBuf);
-	//free(stringArr);
-
-	return 0;
+	//// TODO : 할당 해제 에러
+	for (i = 0; i < count; i++) {
+		//free(stringArrBuf[i]);
+		free(stringArr[i]);
+	}
+	//free(stringArrBuf);
+	free(stringArr);	return 0;
 }
