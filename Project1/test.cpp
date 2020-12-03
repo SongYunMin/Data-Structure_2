@@ -1,301 +1,360 @@
-//#include <stdio.h> 
-//#include <stdlib.h> 
-//#include <string.h> 
+/////////////////////////////////////
+//// 프로그램 제목 : 정렬 알고리즘 실행시간 비교
+//// 작성자 : 20164143 박강민
+//// 제출기한 : 2020.12.03
+/////////////////////////////////////
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <string.h>
 //#include <time.h>
-//#define MAX_SIZE 28000
-//#define SWAP(x, y, t) ((t)=(x), (x)=(y), (y)=(t))
 //
-//#pragma warning(disable: 4996)
+//#define SIZE 100
 //
+//char** sorted;         // 히프정렬에서 사용할 배열
+//
+////////////////선택정렬///////////////
+//void selection_sort(int count, char** copy) {
+//    int i, j, least;
+//    char temp[SIZE];
+//
+//    for (i = 0; i < count - 1; i++) {
+//        least = i;
+//        for (j = i + 1; j < count; j++) {         // 최소값 탐색
+//            if (strcmp(copy[j], copy[least]) > 0)
+//                least = j;
+//            strcpy(temp, copy[j]);
+//            strcpy(copy[j], copy[least]);
+//            strcpy(copy[least], temp);
+//        }
+//    }
+//}
+//////////////////////////////////////
+//
+////////////////삽입정렬///////////////
+//void insertion_sort(int count, char** copy) {
+//    int i, j;
+//    char key[SIZE];
+//
+//    for (i = 1; i < count; i++) {
+//        strcpy(key, copy[i]);
+//        for (j = i - 1; j >= 0 && strcpy(copy[j], key) > 0; j--)
+//            strcpy(copy[j + 1], copy[j]);         // 레코드의 오른쪽 이동
+//        strcpy(copy[j + 1], key);
+//    }
+//}
+//////////////////////////////////////
+//
+////////////////버블정렬///////////////
+//void bubble_sort(int count, char** copy) {
+//    int i, j;
+//    char buffer[SIZE];
+//
+//    int length;
+//
+//    for (i = count - 1; i > 0; i--)
+//        for (j = 0; j < i; j++)
+//            if (strcmp(copy[j], copy[j + 1]) > 0) {// 앞 뒤 레코드를 비교한 후 교체
+//                strcpy(buffer, copy[j]);
+//                strcpy(copy[j], copy[j + 1]);
+//                strcpy(copy[j + 1], buffer);
+//            }
+//}
+//////////////////////////////////////
+//
+/////////////////쉘정렬////////////////
+//// gap 만큼 떨어진 요소들을 삽입 정렬
+//// 정렬의 범위는 first에서 last
+//void inc_insertion_sort(char** copy, int first, int last, int gap) {
+//    int i, j;
+//    char key[SIZE];
+//
+//    for (i = first + gap; i <= last; i = i + gap) {
+//        strcpy(key, copy[i]);
+//        for (j = i - gap; j >= first && strcmp(key, copy[j]) < 0; j = j - gap)
+//            strcpy(copy[j + gap], copy[j]);
+//        strcpy(copy[j + gap], key);
+//    }
+//}
+//
+//void shell_sort(int count, char** copy) {
+//    int i, gap;
+//    for (gap = count / 2; gap > 0; gap = gap / 2) {
+//        if ((gap % 2 == 0)) gap++;
+//        for (i = 0; i < gap; i++)            // 부분 리스트의 개수는 gap
+//            inc_insertion_sort(copy, i, count - 1, gap);
+//    }
+//}
+//////////////////////////////////////
+//
+////////////////합병정렬///////////////
+//// i는 정렬된 왼쪽 배열에 대한 인덱스
+//// j는 정렬된 오른쪽 리스트에 대한 인덱스
+//// k는 정렬될 리스트에 대한 인덱스
+//void merge(char** copy, int left, int mid, int right) {
+//    int i, j, k, l;
+//    int length;
+//    i = left; j = mid + 1, k = left;
+//
+//    // 분할 정렬된 배열의 합병
+//    while (i <= mid && j <= right) {
+//        if (strcmp(copy[i], copy[j]) < 0)
+//            strcpy(sorted[k++], copy[i++]);
+//        else
+//            strcpy(sorted[k++], copy[j++]);
+//    }
+//
+//    if (i > mid)      // 남아있는 레코드의 일괄 복사
+//        for (l = j; l <= right; l++)
+//            strcpy(sorted[k++], copy[l]);
+//
+//    else            // 남아있는 레코드의 일괄 복사
+//        for (l = i; l <= mid; l++)
+//            strcpy(sorted[k++], copy[l]);
+//
+//    // 배열 sorted[]의 리스트를 배열 copy[]로 재복사
+//    for (l = left; l <= right; l++)
+//        strcpy(copy[l], sorted[l]);
+//}
+//
+//void merge_sort(char** copy, int left, int right) {
+//    int mid;
+//    if (left < right) {
+//        mid = (left + right) / 2;         // 리스트의 균등 분할
+//        merge_sort(copy, left, mid);      // 부분 리스트 정렬
+//        merge_sort(copy, mid + 1, right);   // 부분 리스트 정렬
+//        merge(copy, left, mid, right);      // 합병
+//    }
+//}
+//////////////////////////////////////
+//
+/////////////////퀵정렬////////////////
+//int partition(char** copy, int left, int right) {
+//    char pivot[SIZE], temp[SIZE];
+//    int low, high;
+//
+//    low = left;
+//    high = right + 1;
+//    strcpy(pivot, copy[left]);
+//
+//
+//    do {
+//        do
+//            low++;
+//        while (low <= right && strcmp(copy[low], pivot) < 0);
+//
+//        do
+//            high--;
+//        while (high >= left && strcmp(copy[high], pivot) > 0);
+//
+//        if (low < high) {
+//            strcpy(temp, copy[low]);
+//            strcpy(copy[low], copy[high]);
+//            strcpy(copy[high], temp);
+//        }
+//    } while (low < high);
+//
+//    strcpy(temp, copy[left]);
+//    strcpy(copy[left], copy[high]);
+//    strcpy(copy[high], temp);
+//
+//    return high;
+//}
+//
+//void quick_sort(char** copy, int left, int right) {
+//    int q;
+//    if (left < right) {
+//        q = partition(copy, left, right);
+//        quick_sort(copy, left, q - 1);
+//        quick_sort(copy, q + 1, right);
+//    }
+//}
+//////////////////////////////////////
+//
+////////////////히프정렬///////////////
 //typedef struct {
-//	char str[MAX_SIZE];
-//}String;
-//
-//void print(String list[], int n)
-//{
-//	int i;
-//	for (i = 0; i < n; i++)
-//		printf("%s ", list[i].str);
-//}
-//
-//void selection_sort(String list[], int n) // 선택 정렬
-//{
-//	int i, j, least;
-//	String temp;
-//	for (i = 0; i < n - 1; i++) {
-//		least = i;
-//		for (j = i + 1; j < n; j++)
-//			if (strcmp(list[j].str, list[least].str) < 0) least = j;
-//		SWAP(list[i], list[least], temp);
-//	}
-//}
-//
-//void insertion_sort(String list[], int n) // 삽입 정렬
-//{
-//	int i, j;
-//	String key;
-//	for (i = 1; i < n; i++) {
-//		key = list[i];
-//		for (j = i - 1; j >= 0 && strcmp(list[j].str, key.str) > 0; j--)
-//			list[j + 1] = list[j];
-//		list[j + 1] = key;
-//	}
-//}
-//
-//void bubble_sort(String list[], int n) // 버블 정렬
-//{
-//	int i, j;
-//	String temp;
-//
-//	for (i = n - 1; i > 0; i--) {
-//		for (j = 0; j < i; j++)
-//			if (strcmp(list[j].str, list[j + 1].str) > 0) {
-//				SWAP(list[j], list[j + 1], temp);
-//			}
-//	}
-//}
-//
-//void inc_insertion_sort(String list[], int first, int last, int gap)
-//{
-//	int i, j;
-//	String key;
-//
-//	for (i = first + gap; i <= last; i = i + gap)
-//	{
-//		key = list[i];
-//		for (j = i - gap; j >= first && strcmp(key.str, list[j].str) < 0; j = j - gap)
-//			list[j + gap] = list[j];
-//		list[j + gap] = key;
-//	}
-//}
-//void shell_sort(String list[], int n) // 쉘 정렬
-//{
-//	int i, gap;
-//
-//	for (gap = n / 2; gap > 0; gap = gap / 2)
-//	{
-//		if ((gap % 2) == 0)
-//			gap++;
-//		for (i = 0; i < gap; i++)
-//			inc_insertion_sort(list, i, n - 1, gap);
-//	}
-//}
-//
-//String sorted[MAX_SIZE];
-//void merge(String list[], int left, int mid, int right)
-//{
-//	int i, j, k, l;
-//	i = left, j = mid + 1; k = left;
-//
-//	while (i <= mid && j <= right) {
-//		if (strcmp(list[i].str, list[j].str) <= 0)
-//			strcpy(sorted[k++].str, list[i++].str);
-//		else
-//			strcpy(sorted[k++].str, list[j++].str);
-//	}
-//	if (i > mid)
-//		for (l = j; l <= right; l++)
-//			strcpy(sorted[k++].str, list[l].str);
-//	else
-//		for (l = i; l <= mid; l++)
-//			strcpy(sorted[k++].str, list[l].str);
-//	for (l = left; l <= right; l++)
-//		strcpy(list[l].str, sorted[l].str);
-//}
-//void merge_sort(String list[], int left, int right)
-//{
-//	int mid;
-//	if (left < right) {
-//		mid = (left + right) / 2;
-//		merge_sort(list, left, mid);
-//		merge_sort(list, mid + 1, right);
-//		merge(list, left, mid, right);
-//	}
-//}
-//
-//int partition(String list[], int left, int right)
-//{
-//	String pivot, temp;
-//	int low, high;
-//
-//	low = left;
-//	high = right + 1;
-//	pivot = list[left];
-//	do {
-//		do {
-//			low++;
-//		} while (strcmp(list[low].str, pivot.str) < 0);
-//		do {
-//			high--;
-//		} while (strcmp(list[high].str, pivot.str) > 0);
-//		if (low < high) SWAP(list[low], list[high], temp);
-//	} while (low < high);
-//
-//	SWAP(list[left], list[high], temp);
-//	return high;
-//}
-//void quick_sort(String list[], int left, int right)
-//{
-//	if (left < right) {
-//		int q = partition(list, left, right);
-//		quick_sort(list, left, q - 1);
-//		quick_sort(list, q + 1, right);
-//	}
-//}
-//
-//typedef struct {
-//	char key;
-//}element;
-//typedef struct {
-//	element heap[MAX_SIZE];
-//	int heap_size;
+//    char** heap;
+//    int heap_size;
 //}HeapType;
-//HeapType* create()
-//{
-//	return (HeapType*)malloc(sizeof(HeapType));
-//}
-//void init(HeapType* h)
-//{
-//	h->heap_size = 0;
-//}
-//void insert_heap(HeapType* h, element item)
-//{
-//	int i;
-//	i = ++(h->heap_size);
 //
-//	while ((i != 1) && strcmp(&item.key, &h->heap[i / 2].key) > 0)
-//	{
-//		h->heap[i] = h->heap[i / 2];
-//		i /= 2;
-//	}
-//	strcpy(&h->heap[i].key, &item.key);
-//}
-//element delete_heap(HeapType* h)
-//{
-//	int parent, child;
-//	element item, temp;
-//
-//	item = h->heap[1];
-//	temp = h->heap[(h->heap_size)--];
-//	parent = 1;
-//	child = 2;
-//
-//	while (child <= h->heap_size)
-//	{
-//		if ((child < h->heap_size) && strcmp(&h->heap[child].key, &h->heap[child + 1].key) < 0)
-//			child++;
-//		if (strcmp(&temp.key, &h->heap[child].key) >= 0) break;
-//		h->heap[parent] = h->heap[child];
-//		parent = child;
-//		child *= 2;
-//	}
-//	strcpy(&h->heap[parent].key, &temp.key);
-//	return item;
-//}
-//void heap_sort(element a[], int n)
-//{
-//	int i;
-//	HeapType* h;
-//
-//	h = create();
-//	init(h);
-//	for (i = 0; i < n; i++)
-//		insert_heap(h, a[i]);
-//	for (i = (n - 1); i >= 0; i--)
-//		a[i] = delete_heap(h);
-//	free(h);
+//HeapType* create() {
+//    return (HeapType*)malloc(sizeof(HeapType));         // 히프 생성
 //}
 //
-//int main()
-//{
-//	FILE* fp;
-//	String* list;
-//	element* heap_list;
-//	String temp;
-//	int count = 0;
-//	int select;
-//	clock_t start, stop;
-//	double duration;
+//void init(HeapType* h, int count) {
+//    h->heap_size = 0;                           // size 초기화
+//    h->heap = (char**)malloc(sizeof(char*) * count);   // 할당받은 크기만큼 동적 할당
+//}
 //
-//	fp = fopen("text.txt", "r");
+//void insert_max_heap(HeapType* h, char* item) {
+//    int i;
+//    i = ++(h->heap_size);
 //
-//	if (fp == NULL) {
-//		printf("File Not Found\n");
-//		return 0;
-//	}
+//    while ((i != 1) && (strcmp(item, h->heap[i / 2]) > 0)) {
+//        h->heap[i] = h->heap[i / 2];
+//        i /= 2;
+//    }
+//    h->heap[i] = item;
+//}
 //
-//	while (!feof(fp)) {
-//		fscanf(fp, "%s ", &temp.str);
-//		count++;
-//	}
-//	list = (String*)malloc(sizeof(String) * count);
-//	heap_list = (element*)malloc(sizeof(element) * count);
-//	rewind(fp);
-//	count = 0;
-//	while (!feof(fp)) {
-//		fscanf(fp, "%s ", &list[count].str);
-//		count++;
-//	}
+//char* delete_max_heap(HeapType* h) {
+//    int parent, child;
+//    char item[SIZE], temp[SIZE];
 //
-//	while (1)
-//	{
-//		printf("\n정렬 방법을 선택하세요(1. 선택정렬 2. 삽입정렬 3. 버블정렬 4. 쉘정렬 5. 합병정렬 6. 퀵정렬 7. 히프정렬 8. 종료) : ");
-//		scanf("%d", &select);
+//    strcpy(item, h->heap[1]);
+//    strcpy(temp, h->heap[(h->heap_size)--]);
+//    parent = 1;
+//    child = 2;
+//    while (child <= h->heap_size) {
+//        if ((child < h->heap_size) && strcmp(h->heap[child], h->heap[child + 1]) < 0)
+//            child++;
+//        if (strcmp(temp, h->heap[child]) >= 0) break;
 //
-//		start = clock();
+//        strcpy(h->heap[parent], h->heap[child]);
+//        parent = child;
+//        child *= 2;
+//    }
+//    strcpy(h->heap[parent], temp);
+//    return item;
+//}
 //
-//		switch (select)
-//		{
-//		case 1:
-//			printf("<선택 정렬>\n");
-//			selection_sort(list, count);
-//			print(list, count);
-//			break;
-//		case 2:
-//			printf("<삽입 정렬>\n");
-//			insertion_sort(list, count);
-//			print(list, count);
-//			break;
-//		case 3:
-//			printf("<버블 정렬>\n");
-//			bubble_sort(list, count);
-//			print(list, count);
-//			break;
-//		case 4:
-//			printf("<쉘 정렬>\n");
-//			shell_sort(list, count);
-//			print(list, count);
-//			break;
-//		case 5:
-//			printf("<합병 정렬>\n");
-//			merge_sort(list, 0, count - 1);
-//			print(list, count);
-//			break;
-//		case 6:
-//			printf("<퀵 정렬>\n");
-//			quick_sort(list, 0, count - 1);
-//			print(list, count);
-//			break;
-//		case 7:
-//			while (!feof(fp)) {
-//				fscanf(fp, "%s ", &heap_list[count].key);
-//				count++;
-//			}
-//			printf("<히프 정렬>\n");
-//			heap_sort(heap_list, count);
-//			print(list, count);
-//			break;
-//		case 8:
-//			return 0;
-//		}
+//void heap_sort(char* copy[], int count) {
+//    int i;
+//    HeapType* h;
 //
-//		stop = clock();
-//		duration = (double)(stop - start) / CLOCKS_PER_SEC;
+//    h = create();
+//    init(h, count);
+//    for (i = 0; i < count; i++)
+//        insert_max_heap(h, copy[i]);
+//    for (i = (count - 1); i >= 0; i--)
+//        strcpy(copy[i], delete_max_heap(h));
+//    free(h);
+//}
+//////////////////////////////////////
 //
-//		printf("\n걸린시간은 %f입니다.\n", duration);
-//	}
+/////////////배열 복사 함수////////////
+//void copy_list(char** origin, char** copy, int count) {
+//    int i;
+//    for (i = 0; i < count; i++) {
+//        strcpy(copy[i], origin[i]);
+//    }
+//}
+//////////////////////////////////////
 //
-//	free(list);
-//	fclose(fp);
-//	return 0;
+//int main(void) {
+//    FILE* fp;
+//    int i, j, length;
+//    int count = 0;
+//    clock_t start, finish;
+//    double duration;
+//    char buffer[SIZE];
+//
+//    char** origin, ** copy;
+//
+//    fp = fopen("text.txt", "r");
+//
+//    if (fp == NULL) {
+//        printf("File Not Found!\n");
+//        return 0;
+//    }
+//
+//    while (!feof(fp)) {
+//        fscanf(fp, "%s", buffer);
+//        count++;
+//    }
+//
+//    rewind(fp);
+//
+//    origin = (char**)malloc(sizeof(char*) * count);
+//    copy = (char**)malloc(sizeof(char*) * count);
+//    sorted = (char**)malloc(sizeof(char*) * count);
+//
+//    i = 0;
+//    while (!feof(fp)) {
+//        fscanf(fp, "%s", buffer);
+//
+//        length = strlen(buffer);
+//
+//        origin[i] = (char*)malloc(sizeof(char) * SIZE);
+//        copy[i] = (char*)malloc(sizeof(char) * SIZE);
+//        sorted[i] = (char*)malloc(sizeof(char) * SIZE);
+//
+//        strcpy(origin[i], buffer);
+//        strcpy(copy[i], buffer);
+//        i++;
+//    }
+//
+//    printf("\n\n");
+//
+//    //////////////삽입정렬///////////////
+//    start = clock();
+//    insertion_sort(count, copy);
+//    finish = clock();
+//    duration = (double)(finish - start);
+//    printf("삽입정렬 소요시간 : %lf초\n", duration / CLOCKS_PER_SEC);
+//    copy_list(origin, copy, count);
+//    ////////////////////////////////////
+//
+//    //////////////선택정렬///////////////
+//    start = clock();
+//    selection_sort(count, copy);
+//    finish = clock();
+//    duration = (double)(finish - start);
+//    printf("선택정렬 소요시간 : %lf초\n", duration / CLOCKS_PER_SEC);
+//    copy_list(origin, copy, count);
+//    ////////////////////////////////////
+//
+//    //////////////버블정렬///////////////
+//    start = clock();
+//    bubble_sort(count, copy);
+//    finish = clock();
+//    duration = (double)(finish - start);
+//    printf("버블정렬 소요시간 : %lf초\n", duration / CLOCKS_PER_SEC);
+//    copy_list(origin, copy, count);
+//    ////////////////////////////////////
+//
+//    ///////////////쉘정렬////////////////
+//    start = clock();
+//    shell_sort(count, copy);
+//    finish = clock();
+//    duration = (double)(finish - start);
+//    printf("쉘정렬 소요시간 : %lf초\n", duration / CLOCKS_PER_SEC);
+//    copy_list(origin, copy, count);
+//    ////////////////////////////////////
+//
+//    ///////////////퀵정렬////////////////
+//    start = clock();
+//    quick_sort(copy, 0, count - 1);
+//    finish = clock();
+//    duration = (double)(finish - start);
+//    printf("퀵정렬 소요시간 : %lf초\n", duration / CLOCKS_PER_SEC);
+//    copy_list(origin, copy, count);
+//    ////////////////////////////////////
+//
+//    //////////////합병정렬///////////////
+//    start = clock();
+//    merge_sort(copy, 0, count - 1);
+//    finish = clock();
+//    duration = (double)(finish - start);
+//    printf("합병정렬 소요시간 : %lf초\n", duration / CLOCKS_PER_SEC);
+//    copy_list(origin, copy, count);
+//    ////////////////////////////////////
+//
+//    //////////////히프정렬///////////////
+//    start = clock();
+//    heap_sort(copy, count);
+//    finish = clock();
+//    duration = (double)(finish - start);
+//    printf("히프정렬 소요시간 : %lf초\n", duration / CLOCKS_PER_SEC);
+//    ////////////////////////////////////
+//
+//    for (i = 0; i < count; i++) {
+//        free(origin[i]);
+//        free(copy[i]);
+//    }
+//
+//    free(origin);
+//    free(copy);
+//
+//    fclose(fp);
+//    return 0;
 //}

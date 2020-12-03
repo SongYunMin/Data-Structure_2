@@ -8,7 +8,25 @@ clock_t start, finish;
 double bubbleTime, insertionTime, selectionTime, shellTime, mergeTime, quickTime, heapTime;
 int count;
 char** temp;
-//char** pivotBuf;
+
+// 히프 정렬을 위한 구조체 정의 및 초기화 메소드 정의
+typedef struct {
+	char** heap;
+	int heapSize;
+} HeapType;
+
+HeapType* create()
+{
+	return (HeapType*)malloc(sizeof(HeapType));
+}
+
+void init(HeapType* h)
+{
+	h->heapSize = 0;
+	h->heap = (char**)malloc(sizeof(char*) * count);
+}
+
+// 문자열 길이 측정 (strlen은 NULL을 포함하지 않음)
 int stringLength(char* str) 
 {
 	int i = 0;
@@ -17,15 +35,16 @@ int stringLength(char* str)
 	return i + 1;
 }
 
+// 재정렬 메소드
 void reSort(char** arrBuf, char** arr, int count) 
 {
 	printf("-------------Re Sort------------\n");
 	for (int i = 0; i < count; i++) {
-		// ISSUE : Access 위반
 		strcpy(arrBuf[i], arr[i]);
 	}
 }
 
+// 배열 출력
 void printArray(char** arr, int n) 
 {
 	for (int i = 0; i < n; i++) {
@@ -33,6 +52,7 @@ void printArray(char** arr, int n)
 	}
 }
 
+// 버블 정렬
 void bubbleSort(char** arr, int n) 
 {
 	int i, j;
@@ -54,6 +74,7 @@ void bubbleSort(char** arr, int n)
 	printf("Bubble Sort Success....\n");
 }
 
+// 삽입 정렬
 void insertionSort(char** arr, int n) 
 {
 	int i, j;
@@ -74,6 +95,7 @@ void insertionSort(char** arr, int n)
 	printf("Insertion Sort Success....\n");
 }
 
+// 선택 정렬
 void selectionSort(char** arr, int n) 
 {
 	int i, j, index;
@@ -85,7 +107,7 @@ void selectionSort(char** arr, int n)
 	for (i = 0; i < n - 1; i++) {
 		index = i;
 		for (j = i + 1; j < n; j++) {
-			if (strcmp(arr[index], arr[j]) < 0) {
+			if (strcmp(arr[index], arr[j]) >= 0) {
 				index = j;
 			}
 			temp = arr[i];
@@ -98,12 +120,11 @@ void selectionSort(char** arr, int n)
 	printf("Selection Sort Success....\n");
 }
 
-
+// 쉘 정렬
 void shellInsertionSort(char** arr, int first, int last, int gap) 
 {
 	int i, j;
 	char* key;
-
 	for (i = first + gap; i <= last; i = i + gap) {
 		key = arr[i];
 		for (j = i - gap; j >= first && strcmp(arr[j], key) == 1; j = j - gap) {
@@ -112,7 +133,6 @@ void shellInsertionSort(char** arr, int first, int last, int gap)
 		arr[j + gap] = key;
 	}
 }
-
 
 void shellSort(char** arr, int n) 
 {
@@ -131,13 +151,13 @@ void shellSort(char** arr, int n)
 	printf("Shell Sort Success....\n");
 }
 
+// 합병 정렬
 void merge(char** arr, int left, int mid, int right)
 {
 	int i, j, k, l;
 	i = left;
 	j = mid + 1;
 	k = left;
-
 
 	// 분할 정렬된 list를 Merge함
 	while (i <= mid && j <= right) {
@@ -179,106 +199,90 @@ void mergeSort(char** arr, int left, int right)
 
 }
 
-// 퀵 정렬 martition Method
+// 퀵 정렬
 int partition(char** arr, int left, int right)
 {
 	int low, high;
-	char* pivot, *temp;
+	char pivot[100], temp[100];
 	low = left;
 	high = right + 1;
-	pivot = arr[left];
+	strcpy(pivot, arr[left]);
 
 	do {
 		do
 			low++;
-		while (strcmp(arr[low], pivot) < 0);
+		while (low <= right && strcmp(arr[low], pivot) < 0);
 		do
 			high--;
-		while (strcmp(arr[high], pivot) > 0);
+		while (high >= left && strcmp(arr[high], pivot) > 0);
+
 		if (low < high) {
-			temp = arr[left];
-			arr[left] = arr[high];
-			arr[high] = temp;
+			strcpy(temp, arr[low]);
+			strcpy(arr[low], arr[high]);
+			strcpy(arr[high], temp);
 		}
 	} while (low < high);
 
-	temp = arr[left];
-	arr[left] = arr[high];
-	arr[high] = temp;
+	strcpy(temp, arr[left]);
+	strcpy(arr[left], arr[high]);
+	strcpy(arr[high], temp);
 
 	return high;
 }
 
 void quickSort(char** arr, int left, int right) 
 {
+	int quick;
 	if (left < right) {
-		int quick = partition(arr, left, right);
+		quick = partition(arr, left, right);
 		quickSort(arr, left, quick - 1);
 		quickSort(arr, quick + 1, right);
 	}
 }
 
-
-typedef struct {
-	char** key;
-} element;
-
-typedef struct {
-	element heap[MAX_ELEMENT];
-	int heapSize;
-} HeapType;
-
-HeapType* create()
-{
-	return (HeapType*)malloc(sizeof(HeapType));
-}
-
-void init(HeapType* h)
-{
-	h->heapSize = 0;
-}
-
-void insertHeap(HeapType* h, element item)
+// 히프 정렬
+void insertHeap(HeapType* h, char* item)
 {
 	int i;
 	i = ++(h->heapSize);
 	
 	// 트리를 거슬러 올라가면서 부모 노드와 비교하는 과정
-	while ((i != 1) && strcmp(&item.key, &h->heap[i / 2].key) > 0)
+	while ((i != 1) && strcmp(item, h->heap[i / 2]) > 0)
 	{
 		h->heap[i] = h->heap[i / 2];
 		i /= 2;
 	}
-	strcpy(&h->heap[i].key, &item.key);
+	h->heap[i] = item;
 }
 
-element deleteHeap(HeapType* h)
+char* deleteHeap(HeapType* h)
 {
 	int parent, child;
-	element item, temp;
+	char item[100], temp[100];
 
-	item = h->heap[1];
-	temp = h->heap[(h->heapSize)--];
+	strcpy(item, h->heap[1]);
+	strcpy(temp, h->heap[(h->heapSize)--]);
+
 	parent = 1;
 	child = 2;
 
-	while (child <= h->heapSize)
-	{
-		if ((child < h->heapSize) && strcmp(&h->heap[child].key, &h->heap[child + 1].key) < 0) {
+	while (child <= h->heapSize){
+		if ((child < h->heapSize) && strcmp(h->heap[child], &h->heap[child + 1]) < 0) {
 			child++;
 		}
-		if (strcmp(&temp.key, &h->heap[child].key) >= 0) break;
-		h->heap[parent] = h->heap[child];
+
+		if (strcmp(temp, h->heap[child]) >= 0) break;
+
+		strcpy(h->heap[parent], h->heap[child]);
 		parent = child;
 		child *= 2;
 	}
 
-	strcpy(&h->heap[parent].key, &temp.key);
+	strcpy(h->heap[parent], temp);
 	return item;
 }
 
-// 히프 정렬
-void heapSort(element * arr, int n)
+void heapSort(char ** arr, int n)
 {
 	int i;
 	HeapType* h;
@@ -289,22 +293,21 @@ void heapSort(element * arr, int n)
 		insertHeap(h, arr[i]);
 	}
 	for (i = (n - 1); i >= 0; i--) {
-		arr[i] = deleteHeap(h);
+		strcpy(arr[i], deleteHeap(h));
 	}
 	free(h);
 }
 
 
-
+// 메인
 int main(void)
 {
 	// 필요한 변수 및 instance 생성
 	int i;
 	char** stringArr = NULL, ** stringArrBuf = NULL;
 	char* ptr = NULL;
-	char buf[100];
+	char buf[300];
 	FILE* fp;
-	element* heapList;
 
 	// Open File
 	fp = fopen("text.txt", "r");
@@ -362,31 +365,32 @@ int main(void)
 
 		// 파일에 저장된 문자열 각 배열에 복사
 		strcpy(ptr, buf);
-		//strcpy(heapList[i].key, ptr);
-		//heapList[i].key = ptr;
 		strcpy(stringArrBuf[i], ptr);
-		//stringArrBuf[i] = ptr;
 		strcpy(stringArr[i], stringArrBuf[i]);
 	}
 	fclose(fp);
 
-	printf("---------Default Array----------\n");
-	printArray(stringArrBuf, count);
+	//printf("---------Default Array----------\n");
+	//printArray(stringArrBuf, count);
 
 	// 버블 정렬
-	bubbleSort(stringArrBuf, count); printArray(stringArrBuf, count);
+	bubbleSort(stringArrBuf, count); 
+	//printArray(stringArrBuf, count);
 	reSort(stringArrBuf, stringArr, count);
 
 	// 삽입 정렬
-	insertionSort(stringArrBuf, count); printArray(stringArrBuf, count);
+	insertionSort(stringArrBuf, count); 
+	//printArray(stringArrBuf, count);
 	reSort(stringArrBuf, stringArr, count);
 
 	// 선택 정렬
-	selectionSort(stringArrBuf, count); printArray(stringArrBuf, count);
+	selectionSort(stringArrBuf, count); 
+	//printArray(stringArrBuf, count);
 	reSort(stringArrBuf, stringArr, count);
 
 	// 쉘 정렬
-	shellSort(stringArrBuf, count); printArray(stringArrBuf, count);
+	shellSort(stringArrBuf, count); 
+	//printArray(stringArrBuf, count);
 	reSort(stringArrBuf, stringArr, count);
 
 	// 합병 정렬
@@ -401,7 +405,7 @@ int main(void)
 	finish = clock();
 	mergeTime = ((double)finish - start) / CLOCKS_PER_SEC;
 	printf("Merge Sort Success....\n");
-	printArray(stringArrBuf, count);
+	//printArray(stringArrBuf, count);
 	reSort(stringArrBuf, stringArr, count);
 	// 할당 해제
 	for (i = 0; i < count; i++) {
@@ -417,26 +421,25 @@ int main(void)
 	finish = clock();
 	quickTime = ((double)finish - start) / CLOCKS_PER_SEC;
 	printf("Quick Sort Success....\n");
-	printArray(stringArrBuf, count);
+	//printArray(stringArrBuf, count);
 	reSort(stringArrBuf, stringArr, count);
 
 	// 히프 정렬
 	printf("------------Heap Sort-----------");
 	printf("Wait....");
-	heapList = malloc(sizeof(element) * count);		// Heap Sort를 위해 생성한 Heap
 	start = clock();
-	heapSort(heapList, count);
+	heapSort(stringArrBuf, count);
 	finish = clock();
 	heapTime = ((double)finish - start) / CLOCKS_PER_SEC;
 	printf("Heap Sort Success....\n");
-	printArray(stringArrBuf, count);
-	free(heapList);
+	//printArray(stringArrBuf, count);
 
 	printf("버블 정렬 실행 시간 : %lf\n", bubbleTime);
 	printf("삽입 정렬 실행 시간 : %lf\n", insertionTime);
 	printf("선택 정렬 실행 시간 : %lf\n", selectionTime);
 	printf("쉘 정렬 실행 시간 : %lf\n", shellTime);
 	printf("합병 정렬 실행 시간 : %lf\n", mergeTime);
+	printf("퀵 정렬 실행 시간 : %lf\n", quickTime);
 	printf("히프 정렬 실행 시간 : %lf\n", heapTime);
 
 	////// TODO : 할당 해제 에러
