@@ -431,6 +431,7 @@ int main(void)
 	printf("합병 정렬 실행 시간 : %lf\n", mergeTime);
 	printf("퀵 정렬 실행 시간 : %lf\n", quickTime);
 	printf("히프 정렬 실행 시간 : %lf\n", heapTime);
+	printf("test");
 
 	//// TODO : 할당 해제 에러
 	for (i = 0; i < count; i++) {
