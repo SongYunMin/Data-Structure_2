@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Example10.1_Adjacency_Matrix.c" />
     <ClCompile Include="Example12.3_Insertion_Sort.cpp" />
     <ClCompile Include="Example12.4_Bubble_Sort.cpp" />
     <ClCompile Include="Example8.4_Recursion.c" />
