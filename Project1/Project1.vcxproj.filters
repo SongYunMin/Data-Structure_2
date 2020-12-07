@@ -37,6 +37,9 @@
     <Filter Include="소스 파일\HW3">
       <UniqueIdentifier>{428811b4-5ace-4a7f-a35e-9427a3a33cff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\etc">
+      <UniqueIdentifier>{6a81c910-dbea-4b96-a0d3-8c92d6f690b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HW2.c">
@@ -92,6 +95,12 @@
     </ClCompile>
     <ClCompile Include="test.cpp">
       <Filter>소스 파일\HW3</Filter>
+    </ClCompile>
+    <ClCompile Include="Knapsack.cpp">
+      <Filter>소스 파일\etc</Filter>
+    </ClCompile>
+    <ClCompile Include="RSA.cpp">
+      <Filter>소스 파일\etc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

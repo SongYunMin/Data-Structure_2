@@ -152,6 +152,8 @@
     <ClCompile Include="HW2.c" />
     <ClCompile Include="hw2Test.c" />
     <ClCompile Include="HW3.c" />
+    <ClCompile Include="Knapsack.cpp" />
+    <ClCompile Include="RSA.cpp" />
     <ClCompile Include="test.c" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="강민.cpp" />
