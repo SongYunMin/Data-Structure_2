@@ -111,6 +111,12 @@
     <ClCompile Include="Example10.3_DFS_Adjacency_Matrix.c">
       <Filter>소스 파일\Graph</Filter>
     </ClCompile>
+    <ClCompile Include="Example10.4_DFS_Adjacency_List.c">
+      <Filter>소스 파일\Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="Example10.5_BFS_Adjacency_Matrix.c">
+      <Filter>소스 파일\Graph</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="data_2.txt">
