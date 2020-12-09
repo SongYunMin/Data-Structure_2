@@ -28,9 +28,6 @@
     <Filter Include="소스 파일\Test">
       <UniqueIdentifier>{7aaca679-cbca-485f-8726-7a64eae14098}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Graph">
-      <UniqueIdentifier>{8977bcef-ef1e-47f8-bf31-33464fd1d56f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\Sort">
       <UniqueIdentifier>{f6cdbfe4-ebe5-4188-91be-5a614501f698}</UniqueIdentifier>
     </Filter>
@@ -39,6 +36,12 @@
     </Filter>
     <Filter Include="소스 파일\etc">
       <UniqueIdentifier>{6a81c910-dbea-4b96-a0d3-8c92d6f690b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Graph1">
+      <UniqueIdentifier>{8977bcef-ef1e-47f8-bf31-33464fd1d56f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Graph2">
+      <UniqueIdentifier>{8b095743-df48-40e3-ab2f-df9b07c76e62}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -103,22 +106,25 @@
       <Filter>소스 파일\etc</Filter>
     </ClCompile>
     <ClCompile Include="Example10.1_Adjacency_Matrix.c">
-      <Filter>소스 파일\Graph</Filter>
+      <Filter>소스 파일\Graph1</Filter>
     </ClCompile>
     <ClCompile Include="Example10.2_Adjacency_List.c">
-      <Filter>소스 파일\Graph</Filter>
+      <Filter>소스 파일\Graph1</Filter>
     </ClCompile>
     <ClCompile Include="Example10.3_DFS_Adjacency_Matrix.c">
-      <Filter>소스 파일\Graph</Filter>
+      <Filter>소스 파일\Graph1</Filter>
     </ClCompile>
     <ClCompile Include="Example10.4_DFS_Adjacency_List.c">
-      <Filter>소스 파일\Graph</Filter>
+      <Filter>소스 파일\Graph1</Filter>
     </ClCompile>
     <ClCompile Include="Example10.5_BFS_Adjacency_Matrix.c">
-      <Filter>소스 파일\Graph</Filter>
+      <Filter>소스 파일\Graph1</Filter>
     </ClCompile>
     <ClCompile Include="Example10.6_BFS_Adjacency_List.c">
-      <Filter>소스 파일\Graph</Filter>
+      <Filter>소스 파일\Graph1</Filter>
+    </ClCompile>
+    <ClCompile Include="Example11.1_MST_Kruskal.c">
+      <Filter>소스 파일\Graph2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

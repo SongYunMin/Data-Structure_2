@@ -146,6 +146,7 @@
     <ClCompile Include="Example10.4_DFS_Adjacency_List.c" />
     <ClCompile Include="Example10.5_BFS_Adjacency_Matrix.c" />
     <ClCompile Include="Example10.6_BFS_Adjacency_List.c" />
+    <ClCompile Include="Example11.1_MST_Kruskal.c" />
     <ClCompile Include="Example12.3_Insertion_Sort.cpp" />
     <ClCompile Include="Example12.4_Bubble_Sort.cpp" />
     <ClCompile Include="Example8.4_Recursion.c" />
