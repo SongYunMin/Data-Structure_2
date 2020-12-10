@@ -126,6 +126,9 @@
     <ClCompile Include="Example11.1_MST_Kruskal.c">
       <Filter>소스 파일\Graph2</Filter>
     </ClCompile>
+    <ClCompile Include="Exmaple11.10_최단경로_Dijkstra.c">
+      <Filter>소스 파일\Graph2</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="data_2.txt">
