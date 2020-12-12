@@ -140,6 +140,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="3번문제.c" />
+    <ClCompile Include="4번문제.c" />
     <ClCompile Include="Example10.1_Adjacency_Matrix.c" />
     <ClCompile Include="Example10.2_Adjacency_List.c" />
     <ClCompile Include="Example10.3_DFS_Adjacency_Matrix.c" />
@@ -174,6 +176,8 @@
     <Text Include="data.txt" />
     <Text Include="data_2.txt" />
     <Text Include="data_3.txt" />
+    <Text Include="heap_data.txt" />
+    <Text Include="sort_data.txt" />
     <Text Include="text.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

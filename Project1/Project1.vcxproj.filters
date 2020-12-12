@@ -43,6 +43,9 @@
     <Filter Include="소스 파일\Graph2">
       <UniqueIdentifier>{8b095743-df48-40e3-ab2f-df9b07c76e62}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\FinalExam">
+      <UniqueIdentifier>{e2586eed-75e6-419c-a609-be8e483cd899}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HW2.c">
@@ -129,6 +132,12 @@
     <ClCompile Include="Exmaple11.10_최단경로_Dijkstra.c">
       <Filter>소스 파일\Graph2</Filter>
     </ClCompile>
+    <ClCompile Include="3번문제.c">
+      <Filter>소스 파일\FinalExam</Filter>
+    </ClCompile>
+    <ClCompile Include="4번문제.c">
+      <Filter>소스 파일\FinalExam</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="data_2.txt">
@@ -145,6 +154,12 @@
     </Text>
     <Text Include="text.txt">
       <Filter>소스 파일\HW3</Filter>
+    </Text>
+    <Text Include="heap_data.txt">
+      <Filter>소스 파일\FinalExam</Filter>
+    </Text>
+    <Text Include="sort_data.txt">
+      <Filter>소스 파일\FinalExam</Filter>
     </Text>
   </ItemGroup>
 </Project>
